@@ -13,5 +13,24 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('_master');
+});
+
+Route::get('/engagement-account/{acct}', function($acct) {
+
+  //$data['acct'] = $acct;
+
+  return View::make('engagement-account')
+    ->with('acct', $acct);
+
+});
+
+// test mysql connection
+Route::get('mysql-test', function() {
+  
+  // use the DB component to select all the databases
+  $results = DB::select('show databases');
+
+  echo Paste\Pre::r($results);
+
 });
