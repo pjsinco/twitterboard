@@ -35,10 +35,17 @@ Route::get('/', function() {
 
 Route::get('/engagement-account/{acct}', function($acct) {
 
-  //$data['acct'] = $acct;
+  $q = "
+    SELECT *
+    FROM tc_user
+    WHERE screen_name = ?
+  ";
+
+  $user = DB::select($q, array($acct));
 
   return View::make('engagement-account')
-    ->with('acct', $acct);
+    ->with('acct', $acct)
+    ->with('user', $user[0]);
 
 });
 
