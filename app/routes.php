@@ -49,6 +49,17 @@ Route::get('/engagement-account/{acct}', function($acct) {
 
 });
 
+Route::get('/user-profile/{screen_name}', 
+    function($screen_name) {
+
+  $user = User::where('screen_name', '=', $screen_name)
+    ->first();
+
+  View::make('user-profile')
+    ->with('user', $user);
+
+});
+
 // test mysql connection
 Route::get('mysql-test', function() {
   
