@@ -11,9 +11,26 @@
 |
 */
 
-Route::get('/{name?}', function($name = 'World')
-{
-  return View::make('hello')->with('name', $name);
+Route::get('/', function() {
+
+  $q = "
+    select user_id, screen_name, profile_image_url
+    from tc_user
+    where user_id in (
+      select user_id
+      from tc_engagement_account
+    )
+  ";
+
+  $data = DB::select($q);
+  foreach ($data as $user) {
+    $user->url = 
+      URL::to('engagement-account/' . $user->screen_name);
+  }
+
+  // send our $data array to the view
+  return View::make('home')->with('data', $data);
+
 });
 
 Route::get('/engagement-account/{acct}', function($acct) {
