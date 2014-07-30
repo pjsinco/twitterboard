@@ -25,10 +25,10 @@
           {{ $user->location }} <a href='{{ $user->url }}' title='{{ $user->screen_name }} on Twitter'>{{ $user->url }}</a>
         </div>
         <ul class='inline-list'>
-          <li><strong>Followers:</strong> {{ $user->followers_count }}</li>
-          <li><strong>Following:</strong> {{ $user->friends_count }}</li>
-          <li><strong>Tweets:</strong> {{ $user->statuses_count }}</li>
-          <li><strong>Listed:</strong> {{ $user->listed_count }}</li>
+          <li><strong>Followers:</strong> {{ number_format($user->followers_count) }}</li>
+          <li><strong>Following:</strong> {{ number_format($user->friends_count) }}</li>
+          <li><strong>Tweets:</strong> {{ number_format($user->statuses_count) }}</li>
+          <li><strong>Listed:</strong> {{ number_format($user->listed_count) }}</li>
           <li><strong>Created:</strong> {{ $user->created_at }}</li>
         </ul>
       </div> <!-- end large-10 -->
