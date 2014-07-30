@@ -352,3 +352,12 @@ where user_id in (
   select user_id
   from tc_engagement_account
 )
+
+--tweet stats
+select count(*) as total_tweets,
+  datediff(max(created_at), min(created_at)) as tweet_days,
+  min(created_at) as first_tweet
+from tc_tweet
+where user_id = 22638297
+
+

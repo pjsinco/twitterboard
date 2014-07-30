@@ -54,9 +54,50 @@ Route::get('/user-profile/{screen_name}', function($screen_name) {
   $user = User::where('screen_name', '=', $screen_name)
     ->first();
 
-  return View::make('user-profile')
-    ->with('user', $user);
+  //$tweet_query = Tweet::where('user_id', '=', $user->user_id)
+  //$tweet_query = Tweet::get('user_id', '=', $user->user_id)
+    //->first();
 
+  $tweets = DB::table('tc_tweet')
+    ->select(DB::raw('count(*) as total_tweets'))
+    ->addSelect(DB::raw(
+        "datediff(max(created_at), min(created_at)) as tweet_days"
+      ))
+    ->where('user_id', '=', $user->user_id)
+    ->first();
+
+  $mentions = DB::table('tc_tweet_mention')
+    ->where('target_user_id', '=', $user->user_id)
+    ->selectRaw('count(*) as mentioned_count')
+    ->first();
+
+  $retweeted = DB::table('tc_tweet_retweet')
+    ->where('target_user_id', '=', $user->user_id)
+    ->selectRaw('count(*) as retweeted_count')
+    ->first();
+    
+  return View::make('user-profile')
+    ->with('user', $user)
+    ->with('mentioned_per_day', 
+        number_format(
+          $mentions->mentioned_count / $tweets->tweet_days, 1
+        )
+    )
+    ->with('tweets_per_day', 
+        number_format(
+          $tweets->total_tweets / $tweets->tweet_days, 1
+        )
+    )
+    ->with('retweeted_per_day', 
+        number_format(
+          $retweeted->retweeted_count / $tweets->tweet_days, 1
+        )
+    )
+    ->with('retweeted_per_tweet', 
+        number_format(
+          $retweeted->retweeted_count / $tweets->total_tweets, 1
+        )
+    );
 });
 
 // test mysql connection

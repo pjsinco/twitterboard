@@ -4,7 +4,9 @@
   <div class="user">
     
     <div class="header">
-      <h4 class='subheader'>Profile of {{ $user->screen_name }} </h4>
+      <h4 class='subheader'>
+        Profile of &commat;{{ $user->screen_name }}
+      </h4>
     </div>
     <div class="row">
       <div class="columns large-2">
@@ -15,8 +17,40 @@
         <div class="description">
           {{ $user->description }}
         </div>
+      </div> <!-- end col large-10 -->
+    </div> <!-- end row -->
+    <div class="row">
+      <div class="columns large-offset-2 large-10">
+        <div class='user-loc'>
+          {{ $user->location }} <a href='{{ $user->url }}' title='{{ $user->screen_name }} on Twitter'>{{ $user->url }}</a>
+        </div>
+        <ul class='inline-list'>
+          <li><strong>Followers:</strong> {{ $user->followers_count }}</li>
+          <li><strong>Following:</strong> {{ $user->friends_count }}</li>
+          <li><strong>Tweets:</strong> {{ $user->statuses_count }}</li>
+          <li><strong>Listed:</strong> {{ $user->listed_count }}</li>
+          <li><strong>Created:</strong> {{ $user->created_at }}</li>
+        </ul>
+      </div> <!-- end large-10 -->
+    </div> <!-- end row -->
+    <div class="row">
+      <div class="columns large-offset-2 large-10">
+        <h3>
+          Twitter stats <small>(dont' think this is helpful, as currently calculated)</small><br>
+          <small>(More like, for the tweets we have gathered, which may only be 100, 150 or so,<br>
+          these are the numbers)</small>
+        </h3>
+        <ul class="inline-list">
+          <li><strong>Tweets per day</strong> {{ $tweets_per_day }}</li>
+          <li><strong>Retweeted per day</strong>{{ $retweeted_per_day  }}</li>
+          <li><strong>Retweeted per tweet</strong>{{ $retweeted_per_tweet }}</li>
+          <li><strong>Mentioned per day</strong> {{ $mentioned_per_day }}</li>
+        </ul>
+        
       </div>
-    </div>
+    </div> <!-- end row -->
 
-  </div>
+      
+  
+    </div> <!-- end row -->
 @stop
