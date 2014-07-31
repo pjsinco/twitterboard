@@ -366,3 +366,24 @@ where user_id = 22638297
 group by tag
 order by count desc
 
+select count(*) as count, u.screen_name
+from tc_tweet_mention tm inner join tc_user u
+  on tm.target_user_id = u.user_id
+where tm.source_user_id = 22638297
+group by u.screen_name
+order by count desc
+
+SELECT COUNT(*) AS cnt, u.screen_name, u.user_id
+FROM tc_tweet_mention tm inner join tc_user u
+  on tm.target_user_id = u.user_id
+where tm.source_user_id = 22638297
+GROUP BY tm.target_user_id
+ORDER BY cnt DESC, u.screen_name ASC
+
+SELECT COUNT(*) AS cnt, tc_user.screen_name, tc_user.user_id
+FROM tc_tweet_mention, tc_user
+WHERE tc_tweet_mention.source_user_id = tc_user.user_id
+AND tc_tweet_mention.target_user_id = 22638297
+GROUP BY tc_tweet_mention.source_user_id
+ORDER BY cnt DESC, tc_user.screen_name ASC
+LIMIT 6

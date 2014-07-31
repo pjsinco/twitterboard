@@ -49,7 +49,8 @@ Route::get('/engagement-account/{acct}', function($acct) {
 
 });
 
-Route::get('/user-profile/{screen_name}', function($screen_name) {
+Route::get('/user-profile/{screen_name}', array('as' => 'user-profile', 
+  function($screen_name) {
 
   $user = User::where('screen_name', '=', $screen_name)
     ->first();
@@ -77,11 +78,41 @@ Route::get('/user-profile/{screen_name}', function($screen_name) {
     ->selectRaw('count(*) as retweeted_count')
     ->first();
 
-  $mentioned = DB::table('tc_tweet_tag')
+  // get the tags most used by this user
+  $favorite_tags = DB::table('tc_tweet_tag')
     ->where('user_id', '=', $user->user_id)
     ->selectRaw('count(*) as count, tag')
     ->groupBy('tag')
     ->orderBy('count', 'desc')
+    ->limit(10)
+    ->get();
+
+  // get screen_names of users mentioned most by this user
+  // select count(*) as count, u.screen_name, u.user_id
+  // from tc_tweet_mention tm inner join tc_user u
+  //   on tm.target_user_id = u.user_id
+  // where tm.source_user_id = 22638297
+  // group by u.screen_name
+  // order by count desc
+
+  $most_mentioned = DB::table('tc_tweet_mention')
+    ->join('tc_user', 'tc_tweet_mention.target_user_id', '=',
+        'tc_user.user_id')
+    ->where('tc_tweet_mention.source_user_id', '=', $user->user_id)
+    ->selectRaw('count(*) as count, tc_user.screen_name, tc_user.user_id')
+    ->groupBy('tc_tweet_mention.target_user_id')
+    ->orderBy('count', 'desc')
+    ->limit(10)
+    ->get();
+
+  $most_mentioners = DB::table('tc_tweet_mention')
+    ->join('tc_user', 'tc_tweet_mention.source_user_id', '=',
+        'tc_user.user_id')
+    ->where('tc_tweet_mention.target_user_id', '=', $user->user_id)
+    ->selectRaw('count(*) as count, tc_user.screen_name, tc_user.user_id')
+    ->groupBy('tc_tweet_mention.source_user_id')
+    ->orderBy('count', 'desc')
+    ->limit(10)
     ->get();
 
   return View::make('user-profile')
@@ -107,8 +138,10 @@ Route::get('/user-profile/{screen_name}', function($screen_name) {
           $retweeted->retweeted_count / $tweets->total_tweets, 1
         )
     )
-    ->with('favorite_tags', $mentioned);
-});
+    ->with('favorite_tags', $favorite_tags)
+    ->with('most_mentioned', $most_mentioned)
+    ->with('most_mentioners', $most_mentioners);
+}));
 
 // test mysql connection
 Route::get('mysql-test', function() {
