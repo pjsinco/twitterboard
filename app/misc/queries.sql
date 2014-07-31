@@ -360,4 +360,9 @@ select count(*) as total_tweets,
 from tc_tweet
 where user_id = 22638297
 
+select count(*) as count, tag
+from tc_tweet_tag 
+where user_id = 22638297
+group by tag
+order by count desc
 
