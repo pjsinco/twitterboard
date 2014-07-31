@@ -168,6 +168,7 @@ Route::get('/practice-reading', function() {
 
 });
 
+// from susan's notes
 Route::get('/debug', function() {
   
   echo '<pre>';
@@ -183,6 +184,12 @@ Route::get('/debug', function() {
     $contents = '';
   }
 
-
   echo '</pre>';
+});
+
+Route::get('tweets/{screen_name}', function($screen_name) {
+
+  $user = User::where('screen_name', '=', $screen_name)
+    ->first();
+
 });
