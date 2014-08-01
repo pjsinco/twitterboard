@@ -32,7 +32,7 @@ Route::get('/', function() {
   $data = DB::select($q);
   foreach ($data as $user) {
     $user->url = 
-      URL::to('engagement-account/' . $user->screen_name);
+      URL::to('user-profile/' . $user->screen_name);
   }
 
   // send our $data array to the view
@@ -86,6 +86,10 @@ Route::get('/user-profile/{screen_name}', array('as' => 'user-profile',
     ->first();
 
   // get the tags most used by this user
+  // todo find a way to deal with long tags
+  //   --see @drlennypowell
+  //   --#peoplewatchingmepracticeincarthinkingwth
+  //   --that runs into and over the next column!
   $favorite_tags = DB::table('tc_tweet_tag')
     ->where('user_id', '=', $user->user_id)
     ->selectRaw('count(*) as count, tag')
@@ -124,22 +128,22 @@ Route::get('/user-profile/{screen_name}', array('as' => 'user-profile',
     ->with('tweets', $tweets)
     ->with('mentioned_per_day', 
         number_format(
-          $mentions->mentioned_count / $tweets->tweet_days, 1
+          $mentions->mentioned_count / $tweets->tweet_days, 2
         )
     )
     ->with('tweets_per_day', 
         number_format(
-          $tweets->total_tweets / $tweets->tweet_days, 1
+          $tweets->total_tweets / $tweets->tweet_days, 2
         )
     )
     ->with('retweeted_per_day', 
         number_format(
-          $retweeted->retweeted_count / $tweets->tweet_days, 1
+          $retweeted->retweeted_count / $tweets->tweet_days, 2
         )
     )
     ->with('retweeted_per_tweet', 
         number_format(
-          $retweeted->retweeted_count / $tweets->total_tweets, 1
+          $retweeted->retweeted_count / $tweets->total_tweets, 2
         )
     )
     ->with('favorite_tags', $favorite_tags)
