@@ -84,7 +84,6 @@ Route::get('/user-profile/{screen_name}', array('as' => 'user-profile',
     ->selectRaw('count(*) as count, tag')
     ->groupBy('tag')
     ->orderBy('count', 'desc')
-    ->limit(10)
     ->get();
 
   // get screen_names of users mentioned most by this user
@@ -102,7 +101,6 @@ Route::get('/user-profile/{screen_name}', array('as' => 'user-profile',
     ->selectRaw('count(*) as count, tc_user.screen_name, tc_user.user_id')
     ->groupBy('tc_tweet_mention.target_user_id')
     ->orderBy('count', 'desc')
-    ->limit(10)
     ->get();
 
   $most_mentioners = DB::table('tc_tweet_mention')
@@ -112,7 +110,6 @@ Route::get('/user-profile/{screen_name}', array('as' => 'user-profile',
     ->selectRaw('count(*) as count, tc_user.screen_name, tc_user.user_id')
     ->groupBy('tc_tweet_mention.source_user_id')
     ->orderBy('count', 'desc')
-    ->limit(10)
     ->get();
 
   return View::make('user-profile')
