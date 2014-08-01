@@ -26,7 +26,7 @@
       </div>
     </footer>
 
-    <script src='{{ URL::asset('js/vendor/jquery.js') }}' type="text/javascript"></script>
-    <script src='{{ URL::asset('js/vendor/modernizr.js') }}' type="text/javascript"></script>
+    {{ HTML::script('js/vendor/jquery.js') }}
+    {{ HTML::script('js/vendor/modernizr.js') }}
   </body>
 </html>

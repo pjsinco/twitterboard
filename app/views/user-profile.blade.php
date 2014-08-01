@@ -58,7 +58,7 @@
         </ul>
       </div> <!-- end columns -->
       <div class="columns large-4">
-      <h5>Top mentions</h5>
+      <h5>Top mentions by</h5>
         <ul class="no-bullet">
           @foreach($most_mentioned as $mention)
             <li>
@@ -74,7 +74,7 @@
         
       </div> <!-- end columns -->
       <div class="columns large-4">
-        <h5>Top mentioners of &commat;{{ $user->screen_name }}</h5>
+        <h5>Top mentioners of</h5>
         <ul class="no-bullet">
           @foreach($most_mentioners as $mentioner)
             <li>

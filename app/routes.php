@@ -19,7 +19,14 @@ Route::get('/', function() {
     where user_id in (
       select user_id
       from tc_engagement_account
-    )
+    ) 
+    union
+    select user_id, screen_name, profile_image_url
+    from tc_user
+    where user_id in (
+      select user_id
+      from tc_leader
+    ) 
   ";
 
   $data = DB::select($q);
