@@ -51,6 +51,13 @@ class LeaderController extends BaseController
       ->with('tweets', $tweets);
   }
 
+
+  public function postTweetsPopular() {
+
+    return 'hiya';
+
+  }
+
   public function getMentions() {
     // body...
   }

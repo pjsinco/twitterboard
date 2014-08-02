@@ -10,7 +10,7 @@
 
     <div class="row">
       <div class="large-12 columns">
-        <h1>TwitterBoard</h1>
+        <h3>TwitterBoard</h3>
         <hr>
       </div>
     </div> <!-- end row -->
@@ -46,9 +46,22 @@
       </div> <!-- end large-4 -->
 
       <div class="large-8 columns">
-        <div class="search">
-          
-        </div>
+        <div class='search row'>
+          <h4>Search</h4>
+          <div class='large-5 columns'>
+            <label for='from' >Start date</label>
+            <input type='text' id='from' name='from' placeholder='yyyy-mm-dd'>
+          </div>
+          <div class='large-5 columns'>
+            <label for='to' >End date</label>
+            <input type='text' id='to' name='to' placeholder='yyyy-mm-dd'>
+          </div>
+          <div class='large-2 columns'>
+            <button class='button small' type='submit' name='submit' value='1'>Search</button>
+          </div>
+        </div> <!-- end .search .row -->
+        <hr>
+
         <div class="content">
           @yield('content')
         </div>
@@ -67,7 +80,10 @@
       </div>
     </footer>
 
+   
     {{ HTML::script('js/vendor/jquery.js') }}
+    {{ HTML::script('js/vendor/jquery-ui.min.js') }}
+    {{ HTML::script('js/date_picker.js') }}
     {{ HTML::script('js/vendor/modernizr.js') }}
   </body>
 </html>
