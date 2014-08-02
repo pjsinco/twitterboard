@@ -24,6 +24,11 @@
 
 Route::get('/', 'ProfileController@index');
 
+Route::get('leaders/tweets', array(
+  'as'   => 'leader-tweets',
+  'uses' => 'LeaderController@getTweets'
+));
+
 Route::get('/engagement-account/{acct}', function($acct) {
 
   $q = "
@@ -44,8 +49,10 @@ Route::get('/engagement-account/{acct}', function($acct) {
 // names the route 'profile'; 
 // we refer to this route in the view in order to make some links;
 // in the array arg, notice as pass the controller with 'uses'
-Route::get('/profile/{screen_name}', array('as' => 'profile', 
-  'uses' => 'ProfileController@show'));
+Route::get('/profile/{screen_name}', array(
+  'as' => 'profile', 
+  'uses' => 'ProfileController@show'
+));
 
 
 // test mysql connection
