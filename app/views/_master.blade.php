@@ -20,8 +20,8 @@
       <div class="large-4 columns">
         <strong>Leaders</strong>
         <ul class="side-nav">
-          <li><a href="{{ URL::route('leader-tweets') }}">Leader tweets</a></li>
-          <li><a href="#">Popular leader tweets</a></li>
+          <li><a href="{{ URL::route('leader.tweets') }}">Leader tweets</a></li>
+          <li><a href="{{ URL::route('leader.tweets.popular') }}">Popular leader tweets</a></li>
           <li><a href="#">Accounts most mentioned by leaders</a></li>
           <li><a href="#">Accounts most retweeted by leaders</a></li>
           <li><a href="#">Tags tweeted by leaders</a></li>

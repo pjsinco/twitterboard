@@ -25,8 +25,13 @@
 Route::get('/', 'ProfileController@index');
 
 Route::get('leaders/tweets', array(
-  'as'   => 'leader-tweets',
+  'as'   => 'leader.tweets',
   'uses' => 'LeaderController@getTweets'
+));
+
+Route::get('leaders/tweets/popular', array(
+  'as' => 'leader.tweets.popular',
+  'uses' => 'LeaderController@getTweetsPopular'
 ));
 
 Route::get('/engagement-account/{acct}', function($acct) {
