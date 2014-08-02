@@ -11,7 +11,7 @@
       {{ $tweet->tweet_text }}
     </div>
     <div class='meta'>
-      <p><small>{{ $tweet->retweet_count }} retweets since {{ $tweet->created_at }} | {{ $tweet->retweet_count }} favorited</small></p>
+      <p><small>{{ $tweet->retweet_count }} retweets since {{ $tweet->created_at }} | {{ $tweet->favorite_count }} favorited</small></p>
     </div>
   </div> <!--   end .tweet -->
   @endforeach
