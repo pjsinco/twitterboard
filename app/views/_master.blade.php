@@ -22,7 +22,7 @@
         <ul class="side-nav">
           <li><a href="{{ URL::route('leader.tweets') }}">Leader tweets</a></li>
           <li><a href="{{ URL::route('leader.tweets.popular') }}">Popular leader tweets</a></li>
-          <li><a href="#">Accounts most mentioned by leaders</a></li>
+          <li><a href="{{ URL::route('leader.mentions') }}">Accounts most mentioned by leaders</a></li>
           <li><a href="#">Accounts most retweeted by leaders</a></li>
           <li><a href="#">Tags tweeted by leaders</a></li>
         </ul>
@@ -50,14 +50,14 @@
           <h4>Search</h4>
           <div class='large-5 columns'>
             <label for='from' >Start date</label>
-            <input type='text' id='from' name='from' placeholder='yyyy-mm-dd'>
+            <input type='text' id='start' name='start' placeholder='yyyy-mm-dd'>
           </div>
           <div class='large-5 columns'>
             <label for='to' >End date</label>
-            <input type='text' id='to' name='to' placeholder='yyyy-mm-dd'>
+            <input type='text' id='end' name='end' placeholder='yyyy-mm-dd'>
           </div>
           <div class='large-2 columns'>
-            <button class='button small' type='submit' name='submit' value='1'>Search</button>
+            <button class='button small' id='date-pick' type='submit' name='submit' value='1'>Choose</button>
           </div>
         </div> <!-- end .search .row -->
         <hr>

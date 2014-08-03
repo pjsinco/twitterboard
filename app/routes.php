@@ -34,6 +34,14 @@ Route::get('leaders/tweets/popular', array(
   'uses' => 'LeaderController@getTweetsPopular'
 ));
 
+Route::post('leaders/tweets/popular/search', 
+  'LeaderController@postSearchPopularTweets');
+
+Route::get('leaders/mentions', array(
+  'as' => 'leader.mentions',
+  'uses' => 'LeaderController@getMentions'
+));
+
 Route::get('/engagement-account/{acct}', function($acct) {
 
   $q = "
