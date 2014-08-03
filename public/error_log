@@ -1,0 +1,21 @@
+[03-Aug-2014 18:35:52 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 18:36:03 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 18:36:08 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 18:36:21 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 18:56:57 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 18:58:01 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 18:58:47 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:00:27 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:01:28 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:02:49 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 111
+[03-Aug-2014 19:05:59 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:10:05 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 70
+[03-Aug-2014 19:10:18 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 111
+[03-Aug-2014 19:11:14 UTC] PHP Fatal error:  Call to a member function getError() on a non-object in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:11:24 UTC] PHP Fatal error:  Call to a member function getError() on a non-object in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:11:29 UTC] PHP Fatal error:  Call to a member function getError() on a non-object in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:11:34 UTC] PHP Fatal error:  Call to a member function getError() on a non-object in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:11:50 UTC] PHP Fatal error:  Call to a member function getError() on a non-object in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:12:15 UTC] PHP Fatal error:  Call to a member function getError() on a non-object in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:12:19 UTC] PHP Fatal error:  Call to a member function getError() on a non-object in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64
+[03-Aug-2014 19:14:37 UTC] PHP Fatal error:  Can't use function return value in write context in /home/rempatri/public_html/twitterboard.10rempatrick.com/app/controllers/LeaderController.php on line 64

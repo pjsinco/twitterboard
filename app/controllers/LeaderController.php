@@ -61,16 +61,16 @@ class LeaderController extends BaseController
   public function postSearchTweets() {
     // $start is either 1 year ago today or 
     //    the value set by the request
-    if (empty(Request::input('start'))) {
-      $start = date('Y-m-d', strtotime('-1 year'));
-    } else {
+    if (Request::input('start')) {
       $start = Request::input('start');
+    } else {
+      $start = date('Y-m-d', strtotime('-1 year'));
     }
     
-    if (empty(Request::input('end'))) {
-      $end = $start;
-    } else {
+    if (Request::input('end')) {
       $end = Request::input('end');
+    } else {
+      $end = $start;
     }
 
     if (Request::ajax()) {
@@ -108,16 +108,16 @@ class LeaderController extends BaseController
 
     // $start is either 1 year ago today or 
     //    the value set by the request
-    if (empty(Request::input('start'))) {
-      $start = date('Y-m-d', strtotime('-1 year'));
-    } else {
+    if (Request::input('start')) {
       $start = Request::input('start');
+    } else {
+      $start = date('Y-m-d', strtotime('-1 year'));
     }
     
-    if (empty(Request::input('end'))) {
-      $end = $start;
-    } else {
+    if (Request::input('end')) {
       $end = Request::input('end');
+    } else {
+      $end = $start;
     }
 
     if (Request::ajax()) {
