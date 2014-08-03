@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+  $('#start').val($(this).attr('placeholder'));
+  $('#end').val($(this).attr('placeholder'));
+
+
   // the number of ignorable elements when a URL
   // is split('/'), corresponding to 'http:', '', 'domain'
   var urlIgnorable = 3;

@@ -387,3 +387,12 @@ AND tc_tweet_mention.target_user_id = 22638297
 GROUP BY tc_tweet_mention.source_user_id
 ORDER BY cnt DESC, tc_user.screen_name ASC
 LIMIT 6
+
+select
+from tc_tweet_mention tm inner join tc.user u
+  on tm.target_user_id = u.user_id
+where tm.source_user_id in (
+  select user_id
+  from tc_leader
+)
+  
