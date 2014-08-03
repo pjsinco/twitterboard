@@ -61,16 +61,16 @@ class LeaderController extends BaseController
   public function postSearchTweets() {
     // $start is either 1 year ago today or 
     //    the value set by the request
-    if (Request::input('start')) {
-      $start = Request::input('start');
-    } else {
+    if (empty(Request::input('start'))) {
       $start = date('Y-m-d', strtotime('-1 year'));
+    } else {
+      $start = Request::input('start');
     }
     
-    if (Request::input('end')) {
-      $end = Request::input('end');
-    } else {
+    if (empty(Request::input('end'))) {
       $end = $start;
+    } else {
+      $end = Request::input('end');
     }
 
     if (Request::ajax()) {
@@ -106,17 +106,32 @@ class LeaderController extends BaseController
   
   public function postSearchUsers() {
 
-    $this->query_mentions .= "
-
-    ";
-
-    $this->query_mentions .= "
-      group by tm.target_user_id
-      order by count desc
-      limit 100
-    ";
+    // $start is either 1 year ago today or 
+    //    the value set by the request
+    if (empty(Request::input('start'))) {
+      $start = date('Y-m-d', strtotime('-1 year'));
+    } else {
+      $start = Request::input('start');
+    }
     
+    if (empty(Request::input('end'))) {
+      $end = $start;
+    } else {
+      $end = Request::input('end');
+    }
 
+    if (Request::ajax()) {
+      $this->query_mentions .= "
+        and tm.created_at >= '" . $start . "'
+        and tm.created_at <= '" . $end . "'
+        group by tm.target_user_id
+        having count > 0 
+        order by count DESC
+        limit 100
+      ";
+    }
+
+    return DB::select($this->query_mentions);
   }
 
   public function getRetweets() {

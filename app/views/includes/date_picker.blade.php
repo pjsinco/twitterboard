@@ -1,5 +1,5 @@
         <div class='search row'>
-          <h4>Search</h4>
+          <h3><small style='text-transform: uppercase'>Filter by date</small></h3>
           <div class='large-5 columns'>
             <label for='from' >Start date</label>
             <input type='text' id='start' name='start' placeholder='yyyy-mm-dd'>
