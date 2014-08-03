@@ -15,6 +15,16 @@ class LeaderController extends BaseController
     )
   ";
 
+  private $query_mentions = "
+    SELECT count(*) as count, u.*
+    FROM tc_tweet_mention tm inner join tc_user u
+      on tm.target_user_id = u.user_id
+    WHERE tm.source_user_id in (
+      select user_id
+      from tc_leader
+    )
+  ";
+
   public function __construct() {
   
   }
@@ -81,22 +91,31 @@ class LeaderController extends BaseController
 
   public function getMentions() {
 
-    $q = "
-      SELECT count(*) as count, u.*
-      FROM tc_tweet_mention tm inner join tc_user u
-        on tm.target_user_id = u.user_id
-      WHERE tm.source_user_id in (
-        select user_id
-        from tc_leader
-      )
+    $this->query_mentions .= "
       group by tm.target_user_id
-      order by count desc;
+      order by count desc
+      limit 100
     ";
 
-    $users = DB::select($q);
+    $users = DB::select($this->query_mentions);
   
     return View::make('user.index')
       ->with('users', $users);
+
+  }
+  
+  public function postSearchUsers() {
+
+    $this->query_mentions .= "
+
+    ";
+
+    $this->query_mentions .= "
+      group by tm.target_user_id
+      order by count desc
+      limit 100
+    ";
+    
 
   }
 

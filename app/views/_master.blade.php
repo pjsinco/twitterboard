@@ -10,7 +10,7 @@
 
     <div class="row">
       <div class="large-12 columns">
-        <h3>TwitterBoard</h3>
+        <h3><a href="{{ URL::route('home') }}" title="">TwitterBoard</a></h3>
         <hr>
       </div>
     </div> <!-- end row -->

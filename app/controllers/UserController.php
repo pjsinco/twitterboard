@@ -7,33 +7,33 @@ class UserController extends \BaseController {
    *
    * @return Response
    */
-//  public function index() {
-//    $q = "
-//      select user_id, screen_name, profile_image_url
-//      from tc_user
-//      where user_id in (
-//        select user_id
-//        from tc_engagement_account
-//      ) 
-//      union
-//      select user_id, screen_name, profile_image_url
-//      from tc_user
-//      where user_id in (
-//        select user_id
-//        from tc_leader
-//      ) 
-//    ";
-//    
-//    $data = DB::select($q);
-//    foreach ($data as $user) {
-//      $user->url = 
-//        URL::to('user/' . $user->screen_name);
-//    }
-//    
-//    // send our $data array to the view
-//    return View::make('home')->with('data', $data);
-//
-//  } // end index()
+  public function index() {
+    $q = "
+      select user_id, screen_name, profile_image_url
+      from tc_user
+      where user_id in (
+        select user_id
+        from tc_engagement_account
+      ) 
+      union
+      select user_id, screen_name, profile_image_url
+      from tc_user
+      where user_id in (
+        select user_id
+        from tc_leader
+      ) 
+    ";
+    
+    $data = DB::select($q);
+    foreach ($data as $user) {
+      $user->url = 
+        URL::to('user/' . $user->screen_name);
+    }
+    
+    // send our $data array to the view
+    return View::make('home')->with('data', $data);
+
+  } // end index()
   
   
   /**

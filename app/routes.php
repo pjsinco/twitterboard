@@ -22,7 +22,10 @@
    /
  */
 
-Route::get('/', 'UserController@index');
+Route::get('/', array(
+  'as'   => 'home',
+  'uses' => 'UserController@index'
+));
 
 Route::get('leaders/tweets', array(
   'as'   => 'leader.tweets',
@@ -41,6 +44,9 @@ Route::get('leaders/mentions', array(
   'as' => 'leader.mentions',
   'uses' => 'LeaderController@getMentions'
 ));
+
+Route::post('leaders/mentions/search', 
+  'LeaderController@postSearchUsers');
 
 Route::get('/engagement-account/{acct}', function($acct) {
 
