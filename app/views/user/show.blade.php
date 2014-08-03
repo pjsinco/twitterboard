@@ -63,7 +63,7 @@
           @foreach($most_mentioned as $mention)
             <li>
               <strong>
-                <a href="{{ URL::route('profile', array($mention->screen_name)) }}" title="{{ 'hello' }} on Twitter">
+                <a href="{{ URL::route('user', array($mention->screen_name)) }}" title="{{ 'hello' }} on Twitter">
                   &commat;{{ $mention->screen_name }}
                 </a>
               </strong> 
@@ -79,7 +79,7 @@
           @foreach($most_mentioners as $mentioner)
             <li>
               <strong>
-                <a href="{{ URL::route('profile', array($mentioner->screen_name)) }}" title="{{ 'hello' }} on Twitter">
+                <a href="{{ URL::route('user', array($mentioner->screen_name)) }}" title="{{ 'hello' }} on Twitter">
                   &commat;{{ $mentioner->screen_name }}
                 </a>
               </strong> 

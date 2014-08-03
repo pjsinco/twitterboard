@@ -22,7 +22,7 @@
    /
  */
 
-Route::get('/', 'ProfileController@index');
+Route::get('/', 'UserController@index');
 
 Route::get('leaders/tweets', array(
   'as'   => 'leader.tweets',
@@ -34,8 +34,8 @@ Route::get('leaders/tweets/popular', array(
   'uses' => 'LeaderController@getTweetsPopular'
 ));
 
-Route::post('leaders/tweets/popular/search', 
-  'LeaderController@postSearchPopularTweets');
+Route::post('leaders/tweets/search', 
+  'LeaderController@postSearchTweets');
 
 Route::get('leaders/mentions', array(
   'as' => 'leader.mentions',
@@ -62,9 +62,9 @@ Route::get('/engagement-account/{acct}', function($acct) {
 // names the route 'profile'; 
 // we refer to this route in the view in order to make some links;
 // in the array arg, notice as pass the controller with 'uses'
-Route::get('/profile/{screen_name}', array(
-  'as' => 'profile', 
-  'uses' => 'ProfileController@show'
+Route::get('/user/{screen_name}', array(
+  'as' => 'user', 
+  'uses' => 'UserController@show'
 ));
 
 

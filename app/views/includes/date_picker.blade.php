@@ -1,0 +1,15 @@
+        <div class='search row'>
+          <h4>Search</h4>
+          <div class='large-5 columns'>
+            <label for='from' >Start date</label>
+            <input type='text' id='start' name='start' placeholder='yyyy-mm-dd'>
+          </div>
+          <div class='large-5 columns'>
+            <label for='to' >End date</label>
+            <input type='text' id='end' name='end' placeholder='yyyy-mm-dd'>
+          </div>
+          <div class='large-2 columns'>
+            <button class='button small' id='date-pick' type='submit' name='submit' value='1'>Choose</button>
+          </div>
+        </div> <!-- end .search .row -->
+        <hr>

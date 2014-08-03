@@ -1,39 +1,39 @@
 <?php
 
-class ProfileController extends \BaseController {
+class UserController extends \BaseController {
 
   /**
    * Display a listing of the resource.
    *
    * @return Response
    */
-  public function index() {
-    $q = "
-      select user_id, screen_name, profile_image_url
-      from tc_user
-      where user_id in (
-        select user_id
-        from tc_engagement_account
-      ) 
-      union
-      select user_id, screen_name, profile_image_url
-      from tc_user
-      where user_id in (
-        select user_id
-        from tc_leader
-      ) 
-    ";
-    
-    $data = DB::select($q);
-    foreach ($data as $user) {
-      $user->url = 
-        URL::to('profile/' . $user->screen_name);
-    }
-    
-    // send our $data array to the view
-    return View::make('home')->with('data', $data);
-
-  } // end index()
+//  public function index() {
+//    $q = "
+//      select user_id, screen_name, profile_image_url
+//      from tc_user
+//      where user_id in (
+//        select user_id
+//        from tc_engagement_account
+//      ) 
+//      union
+//      select user_id, screen_name, profile_image_url
+//      from tc_user
+//      where user_id in (
+//        select user_id
+//        from tc_leader
+//      ) 
+//    ";
+//    
+//    $data = DB::select($q);
+//    foreach ($data as $user) {
+//      $user->url = 
+//        URL::to('user/' . $user->screen_name);
+//    }
+//    
+//    // send our $data array to the view
+//    return View::make('home')->with('data', $data);
+//
+//  } // end index()
   
   
   /**
@@ -130,7 +130,7 @@ class ProfileController extends \BaseController {
       ->orderBy('count', 'desc')
       ->get();
   
-    return View::make('profile')
+    return View::make('user.show')
       ->with('user', $user)
       ->with('tweets', $tweets)
       ->with('mentioned_per_day', 

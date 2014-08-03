@@ -20,7 +20,7 @@ $(document).ready(function() {
 
     $.ajax({
       type: 'POST',
-      url: '/leaders/tweets/popular/search',
+      url: '/leaders/tweets/search',
       data: {
         start: $('#start').val(),
         end: $('#end').val()
@@ -40,7 +40,7 @@ $(document).ready(function() {
             '">&commat;' + d.screen_name + '</a>' + '</div>' + 
             '<div class="text">' + d.tweet_text + '</div>' +
             '<div class="meta">' +
-            '<p><small>' + d.retweet_count + 'retweets since ' + 
+            '<p><small>' + d.retweet_count + ' retweets since ' + 
             d.created_at + '| ' + d.favorite_count + 
             ' favorited</small></p></div></div> <!--   end .tweet -->'
           );

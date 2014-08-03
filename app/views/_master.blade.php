@@ -18,53 +18,16 @@
     <!-- side navigation -->
     <div class="row">
       <div class="large-4 columns">
-        <strong>Leaders</strong>
-        <ul class="side-nav">
-          <li><a href="{{ URL::route('leader.tweets') }}">Leader tweets</a></li>
-          <li><a href="{{ URL::route('leader.tweets.popular') }}">Popular leader tweets</a></li>
-          <li><a href="{{ URL::route('leader.mentions') }}">Accounts most mentioned by leaders</a></li>
-          <li><a href="#">Accounts most retweeted by leaders</a></li>
-          <li><a href="#">Tags tweeted by leaders</a></li>
-        </ul>
-        <strong>Circle</strong>
-        <ul class="side-nav">
-          <li><a href="#">All tweets</a></li>
-          <li><a href="#">Search tweets</a></li>
-          <li><a href="#">Search users</a></li>
-          <li><a href="#">Most frequent mentioners</a></li>
-          <li><a href="#">Most frequent retweeters</a></li>
-          <li><a href="#">Tags tweeted by circle</a></li>
-        </ul>
-        <strong>Us</strong>
-        <ul class="side-nav">
-          <li><a href="#">All tweets</a></li>
-          <li><a href="#">Popular tweets</a></li>
-          <li><a href="#">Most frequent mentioners of us</a></li>
-          <li><a href="#">Most frequent retweeters of us</a></li>
-          <li><a href="#">Tags tweeted by us</a></li>
-        </ul>
+        @include('includes.menu')
       </div> <!-- end large-4 -->
 
       <div class="large-8 columns">
-        <div class='search row'>
-          <h4>Search</h4>
-          <div class='large-5 columns'>
-            <label for='from' >Start date</label>
-            <input type='text' id='start' name='start' placeholder='yyyy-mm-dd'>
-          </div>
-          <div class='large-5 columns'>
-            <label for='to' >End date</label>
-            <input type='text' id='end' name='end' placeholder='yyyy-mm-dd'>
-          </div>
-          <div class='large-2 columns'>
-            <button class='button small' id='date-pick' type='submit' name='submit' value='1'>Choose</button>
-          </div>
-        </div> <!-- end .search .row -->
-        <hr>
+        @include('includes.date_picker')
 
         <div class="content">
           @yield('content')
         </div>
+
       </div> <!-- end large-8 -->
     </div> <!-- end row -->
 
