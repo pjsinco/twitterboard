@@ -4,8 +4,7 @@
 
   <h4>Top hashtags tweeted by leaders</h4>
 
-  <table>
-
+  <table class='tags'>
     <thead>
       <tr>
         <th width='100'>Count</th>
@@ -13,12 +12,7 @@
       </tr>
     </thead>
     <tbody>
-    @foreach($tags as $tag)
-      <tr>
-        <td>{{ $tag->count }}</td>      
-        <td>#{{ $tag->tag }}</td>      
-      </tr>
-    @endforeach
+
     </tbody>
   </table>
 @stop

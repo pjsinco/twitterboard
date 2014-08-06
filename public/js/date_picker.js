@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
-  // set up the datepicker
+  /**
+   * Set up the datepicker
+   */
   $('#start').datepicker({
     dateFormat: 'yy-mm-dd',
     onClose: function(selectedDate) {
@@ -16,7 +18,9 @@ $(document).ready(function() {
   });
 
 
-  // compute the date values and set them
+  /**
+   * Compute the date values and set them
+   */
   var d = new Date();
   var curr_year = d.getFullYear();
   var curr_month = ('0' + (d.getMonth() + 1)).slice(-2);
@@ -35,12 +39,20 @@ $(document).ready(function() {
     $('#end').val(endDate);
   }
 
+  /**
+   * Parse the URL
+   */
   // the number of ignorable elements when a URL
   // is split('/'), corresponding to 'http:', '', 'domain'
   var urlIgnorable = 3;
   var url = document.URL.split('/');
   var controller = url.slice(urlIgnorable - url.length)[0];
   var entity = url.slice(urlIgnorable - url.length)[1];
+
+  console.log('start: ' + startDate);
+  console.log('end: ' + endDate);
+  console.log('controller: ' + controller);
+  console.log('entity: ' + entity);
 
   // make an ajax call to get the content
   // TODO: turn ajax call into a method
@@ -55,18 +67,34 @@ $(document).ready(function() {
 
       console.log(response);
 
-      // clear out .content
-      $('.content').html('');
-
-      response.forEach(function(d, i) {
-        if (entity == 'tweets') {
-          $('.content').append(formatTweet(d));
-        } else if (entity == 'mentions' || 
-            entity == 'retweets') {
-          $('.content').append(formatUser(d, entity));
-        }
-      });
-      
+      switch (entity) {
+        case 'tweets':
+          response.forEach(function(d, i) {
+            $('.content').append(formatTweet(d));
+          });
+          break;
+        case 'mentions':
+          response.forEach(function(d, i) {
+            $('.content').append(formatUser(d));
+          });
+          break;
+        case 'retweets':
+          response.forEach(function(d, i) {
+            $('.content').append(formatUser(d));
+          });
+          break;
+        case 'tags':
+          formatTable();
+          response.forEach(function(d, i) {
+            $('.content table tbody').append(formatTag(d));
+          });
+          break;
+        default: // fallback is leader tweets; right move?
+          response.forEach(function(d, i) {
+            $('.content').append(formatTweet(d));
+          });
+          break;
+      }
     }
   });
 
@@ -79,9 +107,6 @@ $(document).ready(function() {
 
     console.log('controller: ' + controller);
     console.log('entity: ' + entity);
-
-
-    //console.log($('#end').val() === '' );
     console.log('start: ' + $('#start').val());
     console.log('end: ' + $('#end').val());
 
@@ -99,49 +124,92 @@ $(document).ready(function() {
         // clear out .content
         $('.content').html('');
 
-        response.forEach(function(d, i) {
-          if (entity == 'tweets') {
-            $('.content').append(formatTweet(d));
-          } else if (entity == 'mentions' || 
-              entity == 'retweets') {
-            $('.content').append(formatUser(d, entity));
-          }
-        });
-        
+        switch (entity) {
+          case 'tweets':
+            response.forEach(function(d, i) {
+              $('.content').append(formatTweet(d));
+            });
+            break;
+          case 'mentions':
+            response.forEach(function(d, i) {
+              $('.content').append(formatUser(d));
+            });
+            break;
+          case 'retweets':
+            response.forEach(function(d, i) {
+              $('.content').append(formatUser(d));
+            });
+            break;
+          case 'tags':
+            formatTable();
+            response.forEach(function(d, i) {
+              $('.content table tbody').append(formatTag(d));
+            });
+            break;
+          default: // fallback is leader tweets; right move?
+            response.forEach(function(d, i) {
+              $('.content').append(formatTweet(d));
+            });
+            break;
+        }
       }
     });
-
   });
 
-  // format a single tweet
-  var formatTweet = function(tweet) {
 
+  /**
+   * Format table for listing tags
+   */
+  var formatTable = function() {
+    var $content = $('.content').html('');
+    $content.append('<table><thead><tr><th width="100">Count</th>' +
+      '<th widtb="200">Tag</th><tbody>');
+  };
+
+
+  /**
+   * Format a tag
+   */
+  var formatTag = function(tag) {
+    var html = '';
+    html += '<tr>';
+    html += '<td>' + tag.count + '</td>';
+    html += '<td>#' + tag.tag + '</td>';
+    html += '</tr>';
+    return html;
+  };
+
+
+  /*
+   * Format a single tweet
+   */
+  var formatTweet = function(tweet) {
     var html = '';
     html +=  '<div class="tweet">' + 
       '<p class="left"><img src="' + 
         tweet.profile_image_url + '"></p>' + 
       '<div class="name">' + tweet.name + 
-      '<a href="http://localhost/profile/' + tweet.screen_name + 
+      '<a href="http://localhost/user/' + tweet.screen_name + 
       '">&commat;' + tweet.screen_name + '</a>' + '</div>' + 
       '<div class="text">' + tweet.tweet_text + '</div>' +
       '<div class="meta">' +
       '<p><small>' + tweet.retweet_count + ' retweets since ' + 
       tweet.created_at + '| ' + tweet.favorite_count + 
       ' favorited</small></p></div></div> <!--   end .tweet -->';
-
     return html;
   };
 
 
-  // format a single user
+  /**
+   * Format a single user
+   */
   var formatUser = function(user, entity) {
-
     var html = '';
     html += '<div class="panel">' +
       '<span class="label right">' + user.count + ' ' + 
       entity + '</span>' +
-      '<p class="left"><img src="' + user.profile_image_url + '"></p>' +
-      '<div class="name">' + user.name + '<a href="/user/' + 
+      '<p class="left"><img src="' + user.profile_image_url + 
+      '"></p>' + '<div class="name">' + user.name + '<a href="/user/' +
       user.screen_name + '">&commat;' + user.screen_name + '</a>' +
       '</div>' +
       '<div class="description">' +
@@ -161,10 +229,6 @@ $(document).ready(function() {
       "<li><strong>Created:</strong>"   + user.created_at +
         "</li>" +
       "</ul>" + '</div> <!-- end .panel  -->';
-  
     return html;
-    
   };
-
-
 });

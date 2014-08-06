@@ -178,21 +178,46 @@ class LeaderController extends BaseController
 
   public function getTags() {
 
-    $this->query_tags .= "
-      group by tag
-      order by count desc, tag asc
-      limit 100
-    ";
+//    $this->query_tags .= "
+//      group by tag
+//      order by count desc, tag asc
+//      limit 100
+//    ";
+//
+//    $tags = DB::select($this->query_tags);
 
-    $tags = DB::select($this->query_tags);
-
-    return View::make('tag.index')
-      ->with('tags', $tags)
-      ->with('entities', 'tags');
+    return View::make('tag.index');
+      //->with('tags', $tags);
+      //->with('entities', 'tags');
 
   }
 
   public function postSearchTags() {
+    // $start is either 1 year ago today or 
+    //    the value set by the request
+    if (Request::input('start')) {
+      $start = Request::input('start');
+    } else {
+      $start = date('Y-m-d', strtotime('-1 year'));
+    }
+    
+    if (Request::input('end')) {
+      $end = Request::input('end');
+    } else {
+      $end = $start;
+    }
+
+    if (Request::ajax()) {
+      $this->query_tags .= "
+        and created_at >= '" . $start . "'
+        and created_at <= '" . $end . "'
+        group by tag
+        order by count desc, tag asc
+        limit 100
+      ";
+    }
+
+    return DB::select($this->query_tags);
 
   }
 
