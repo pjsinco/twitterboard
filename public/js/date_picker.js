@@ -24,28 +24,33 @@ $(document).ready(function() {
 
   $('#date-pick').click(function() {
   
-    // parse the url to get the controller and method
+    // parse the url to get the controller and entity
     var url = document.URL.split('/');
     var controller = url.slice(urlIgnorable - url.length)[0];
-    var method = url.slice(urlIgnorable - url.length)[1];
+    var entity = url.slice(urlIgnorable - url.length)[1];
 
     console.log('controller: ' + controller);
-    console.log('method: ' + method);
+    console.log('entity: ' + entity);
 
     if ($('#start').val() === '' ) {
       var d = new Date();
       var curr_year = d.getFullYear();
       var curr_month = ('0' + (d.getMonth() + 1)).slice(-2);
+      var last_month = ('0' + d.getMonth()).slice(-2);
       var curr_date = ('0' + d.getDate()).slice(-2);
 
-      var date = curr_year + '-' + curr_month + '-' + curr_date;
-      $('#start').val(date);
+      var startDate = curr_year + '-' + last_month + '-' + curr_date;
+      var endDate = curr_year + '-' + curr_month + '-' + curr_date;
+      $('#start').val(startDate);
+      $('#end').val(endDate);
     }
     //console.log($('#end').val() === '' );
+    console.log('start: ' + $('#start').val());
+    console.log('end: ' + $('#end').val());
 
     $.ajax({
       type: 'POST',
-      url: '/' + controller + '/' + method + '/search',
+      url: '/' + controller + '/' + entity + '/search',
       data: {
         start: $('#start').val(),
         end: $('#end').val()
@@ -58,10 +63,11 @@ $(document).ready(function() {
         $('.content').html('');
 
         response.forEach(function(d, i) {
-          if (method == 'tweets') {
+          if (entity == 'tweets') {
             $('.content').append(addTweet(d));
-          } else if (method == 'mentions') {
-            $('.content').append(addUser(d));
+          } else if (entity == 'mentions' || 
+              entity == 'retweets') {
+            $('.content').append(addUser(d, entity));
           }
         });
         
@@ -88,11 +94,12 @@ $(document).ready(function() {
     return html;
   };
 
-  var addUser = function(user) {
+  var addUser = function(user, entity) {
 
     var html = '';
     html += '<div class="panel">' +
-      '<span class="label right">' + user.count + ' mentions</span>' +
+      '<span class="label right">' + user.count + ' ' + 
+      entity + '</span>' +
       '<p class="left"><img src="' + user.profile_image_url + '"></p>' +
       '<div class="name">' + user.name + '<a href="/user/' + 
       user.screen_name + '">&commat;' + user.screen_name + '</a>' +

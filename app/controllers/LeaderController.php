@@ -25,6 +25,16 @@ class LeaderController extends BaseController
     )
   ";
 
+  private $query_retweets = "
+    SELECT count(*) as count, u.*
+    FROM tc_tweet_retweet tr inner join tc_user u
+      on tr.target_user_id = u.user_id
+    WHERE tr.source_user_id in (
+      select user_id
+      from tc_leader
+    )
+  ";
+
   public function __construct() {
   
   }
@@ -66,6 +76,7 @@ class LeaderController extends BaseController
     } else {
       $start = date('Y-m-d', strtotime('-1 year'));
     }
+
     
     if (Request::input('end')) {
       $end = Request::input('end');
@@ -100,7 +111,8 @@ class LeaderController extends BaseController
     $users = DB::select($this->query_mentions);
   
     return View::make('user.index')
-      ->with('users', $users);
+      ->with('users', $users)
+      ->with('entities', 'mentions');
 
   }
   
@@ -135,7 +147,18 @@ class LeaderController extends BaseController
   }
 
   public function getRetweets() {
-    // body...
+    
+    $this->query_retweets .= "
+      group by tr.target_user_id
+      order by count desc
+      limit 100
+    ";
+
+    $users = DB::select($this->query_retweets);
+  
+    return View::make('user.index')
+      ->with('users', $users)
+      ->with('entities', 'retweets');
   }
 
   public function getTags() {

@@ -1,11 +1,11 @@
 @extends('_master')
 
 @section('content')
-  <h4>Top mentions by leaders</h4>
+  <h4>Top {{ $entities }} by leaders</h4>
   @foreach($users as $user)
 
     <div class="panel">
-      <span class='label right'>{{ $user->count }} mentions</span>
+      <span class='label right'>{{ $user->count }} {{ $entities }}</span>
       <p class="left"><img src="{{ $user->profile_image_url }}"></p>
       <div class="name">
         {{ $user->name }} <a href="{{ URL::route('user', array($user->screen_name)) }}">&commat;{{ $user->screen_name }}</a>

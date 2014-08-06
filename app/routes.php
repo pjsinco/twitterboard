@@ -48,7 +48,15 @@ Route::get('leaders/mentions', array(
 Route::post('leaders/mentions/search', 
   'LeaderController@postSearchUsers');
 
-Route::get('/engagement-account/{acct}', function($acct) {
+Route::get('leaders/retweets', array(
+  'as' => 'leader.retweets',
+  'uses' => 'LeaderController@getRetweets'
+));
+
+Route::post('leaders/retweets/search', 
+  'LeaderController@postSearchUsers');
+
+Route::get('engagement-account/{acct}', function($acct) {
 
   $q = "
     SELECT *
