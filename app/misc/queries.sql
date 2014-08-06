@@ -396,3 +396,7 @@ where tm.source_user_id in (
   from tc_leader
 )
   
+select t.*, tt.*
+from tc_tweet_tag tt inner join tc_tweet t
+  on tt.tweet_id = t.tweet_id
+where tag = 'Wimbledon'
