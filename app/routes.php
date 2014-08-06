@@ -27,6 +27,9 @@ Route::get('/', array(
   'uses' => 'UserController@index'
 ));
 
+/**
+ * Leaders
+ */
 Route::get('leaders/tweets', array(
   'as'   => 'leader.tweets',
   'uses' => 'LeaderController@getTweets'
@@ -55,6 +58,15 @@ Route::get('leaders/retweets', array(
 
 Route::post('leaders/retweets/search', 
   'LeaderController@postSearchUsers');
+
+Route::get('leaders/tags', array(
+  'as' => 'leader.tags',
+  'uses' => 'LeaderController@getTags'
+));
+
+Route::post('leaders/tags/search', 
+  'LeaderController@postSearchTags');
+
 
 Route::get('engagement-account/{acct}', function($acct) {
 

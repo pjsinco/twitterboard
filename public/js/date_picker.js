@@ -1,13 +1,6 @@
 $(document).ready(function() {
 
-  $('#start').val($(this).attr('placeholder'));
-  $('#end').val($(this).attr('placeholder'));
-
-
-  // the number of ignorable elements when a URL
-  // is split('/'), corresponding to 'http:', '', 'domain'
-  var urlIgnorable = 3;
-
+  // set up the datepicker
   $('#start').datepicker({
     dateFormat: 'yy-mm-dd',
     onClose: function(selectedDate) {
@@ -22,6 +15,61 @@ $(document).ready(function() {
     }
   });
 
+
+  // compute the date values and set them
+  var d = new Date();
+  var curr_year = d.getFullYear();
+  var curr_month = ('0' + (d.getMonth() + 1)).slice(-2);
+  var last_month = ('0' + d.getMonth()).slice(-2);
+  var curr_date = ('0' + d.getDate()).slice(-2);
+  var startDate, endDate;
+
+  if ($('#start').val() === '' ) {
+    startDate = curr_year + '-' + last_month + '-' + curr_date;
+    endDate = curr_year + '-' + curr_month + '-' + curr_date;
+
+    $('#start').val(startDate);
+    $('#end').val(endDate);
+  } else if ($('#end').val() === '' && $('#start').val() !== '') {
+    endDate = curr_year + '-' + curr_month + '-' + curr_date;
+    $('#end').val(endDate);
+  }
+
+  // the number of ignorable elements when a URL
+  // is split('/'), corresponding to 'http:', '', 'domain'
+  var urlIgnorable = 3;
+  var url = document.URL.split('/');
+  var controller = url.slice(urlIgnorable - url.length)[0];
+  var entity = url.slice(urlIgnorable - url.length)[1];
+
+  // make an ajax call to get the content
+  // TODO: turn ajax call into a method
+  $.ajax({
+    type: 'POST',
+    url: '/' + controller + '/' + entity + '/search',
+    data: {
+      start: $('#start').val(),
+      end: $('#end').val()
+    },
+    success: function(response) {
+
+      console.log(response);
+
+      // clear out .content
+      $('.content').html('');
+
+      response.forEach(function(d, i) {
+        if (entity == 'tweets') {
+          $('.content').append(formatTweet(d));
+        } else if (entity == 'mentions' || 
+            entity == 'retweets') {
+          $('.content').append(formatUser(d, entity));
+        }
+      });
+      
+    }
+  });
+
   $('#date-pick').click(function() {
   
     // parse the url to get the controller and entity
@@ -32,18 +80,7 @@ $(document).ready(function() {
     console.log('controller: ' + controller);
     console.log('entity: ' + entity);
 
-    if ($('#start').val() === '' ) {
-      var d = new Date();
-      var curr_year = d.getFullYear();
-      var curr_month = ('0' + (d.getMonth() + 1)).slice(-2);
-      var last_month = ('0' + d.getMonth()).slice(-2);
-      var curr_date = ('0' + d.getDate()).slice(-2);
 
-      var startDate = curr_year + '-' + last_month + '-' + curr_date;
-      var endDate = curr_year + '-' + curr_month + '-' + curr_date;
-      $('#start').val(startDate);
-      $('#end').val(endDate);
-    }
     //console.log($('#end').val() === '' );
     console.log('start: ' + $('#start').val());
     console.log('end: ' + $('#end').val());
@@ -64,10 +101,10 @@ $(document).ready(function() {
 
         response.forEach(function(d, i) {
           if (entity == 'tweets') {
-            $('.content').append(addTweet(d));
+            $('.content').append(formatTweet(d));
           } else if (entity == 'mentions' || 
               entity == 'retweets') {
-            $('.content').append(addUser(d, entity));
+            $('.content').append(formatUser(d, entity));
           }
         });
         
@@ -76,7 +113,8 @@ $(document).ready(function() {
 
   });
 
-  var addTweet = function(tweet) {
+  // format a single tweet
+  var formatTweet = function(tweet) {
 
     var html = '';
     html +=  '<div class="tweet">' + 
@@ -94,7 +132,9 @@ $(document).ready(function() {
     return html;
   };
 
-  var addUser = function(user, entity) {
+
+  // format a single user
+  var formatUser = function(user, entity) {
 
     var html = '';
     html += '<div class="panel">' +

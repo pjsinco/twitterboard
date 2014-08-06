@@ -3,7 +3,7 @@
 class LeaderController extends BaseController
 {
 
-  private $query = "
+  private $query_tweets = "
     SELECT t.tweet_text, t.created_at, u.screen_name, u.name, 
       u.user_id, t.retweet_count, t.favorite_count, 
       u.profile_image_url
@@ -35,37 +35,50 @@ class LeaderController extends BaseController
     )
   ";
 
+  private $query_tags = "
+    select count(*) as count, tag
+    from tc_tweet_tag 
+    where user_id in (
+      select user_id
+      from tc_leader
+    )
+  ";
+
   public function __construct() {
   
   }
   
   public function getTweets() {
 
-    $this->query .= "
-      order by t.created_at DESC
-      limit 100
-    ";
+//    $this->query_tweets .= "
+//      order by t.created_at DESC
+//      limit 100
+//    ";
+//
+//    $tweets = DB::select($this->query_tweets);
 
-    $tweets = DB::select($this->query);
-
-    return View::make('leader.tweets')
-      ->with('tweets', $tweets);
+    return View::make('includes.blank');
+    //return View::make('tweet.index')
+      //->with('tweets', $tweets);
   }
 
   public function getTweetsPopular() {
 
-    $this->query .= "
-      and (
-        t.retweet_count > 0 
-          or t.favorite_count > 0)
-      order by t.retweet_count DESC
-      limit 100
-    ";
+//    $this->query_tweets .= "
+//      and (
+//        t.retweet_count > 0 
+//          or t.favorite_count > 0)
+//      order by t.retweet_count DESC
+//      limit 100
+//    ";
+//
+//    $tweets = DB::select($this->query_tweets);
 
-    $tweets = DB::select($this->query);
-
-    return View::make('leader.tweets')
-      ->with('tweets', $tweets);
+    // we're using ajax to populate the popular tweets, 
+    // so just return a blank view
+    return View::make('includes.blank');
+    //return View::make('tweet.index');
+      //->with('tweets', $tweets);
   }
 
   public function postSearchTweets() {
@@ -85,7 +98,7 @@ class LeaderController extends BaseController
     }
 
     if (Request::ajax()) {
-      $this->query .= "
+      $this->query_tweets .= "
         and (
           t.retweet_count > 0 
             or t.favorite_count > 0)
@@ -96,23 +109,24 @@ class LeaderController extends BaseController
       ";
     } 
 
-    return DB::select($this->query);
+    return DB::select($this->query_tweets);
 
   }
 
   public function getMentions() {
 
-    $this->query_mentions .= "
-      group by tm.target_user_id
-      order by count desc
-      limit 100
-    ";
-
-    $users = DB::select($this->query_mentions);
-  
-    return View::make('user.index')
-      ->with('users', $users)
-      ->with('entities', 'mentions');
+//    $this->query_mentions .= "
+//      group by tm.target_user_id
+//      order by count desc
+//      limit 100
+//    ";
+//
+//    $users = DB::select($this->query_mentions);
+//  
+//    return View::make('user.index')
+//      ->with('users', $users)
+//      ->with('entities', 'mentions');
+    return View::make('includes.blank');
 
   }
   
@@ -148,21 +162,38 @@ class LeaderController extends BaseController
 
   public function getRetweets() {
     
-    $this->query_retweets .= "
-      group by tr.target_user_id
-      order by count desc
-      limit 100
-    ";
-
-    $users = DB::select($this->query_retweets);
-  
-    return View::make('user.index')
-      ->with('users', $users)
-      ->with('entities', 'retweets');
+//    $this->query_retweets .= "
+//      group by tr.target_user_id
+//      order by count desc
+//      limit 100
+//    ";
+//
+//    $users = DB::select($this->query_retweets);
+//  
+//    return View::make('user.index')
+//      ->with('users', $users)
+//      ->with('entities', 'retweets');
+    return View::make('includes.blank');
   }
 
   public function getTags() {
-    // body...
+
+    $this->query_tags .= "
+      group by tag
+      order by count desc, tag asc
+      limit 100
+    ";
+
+    $tags = DB::select($this->query_tags);
+
+    return View::make('tag.index')
+      ->with('tags', $tags)
+      ->with('entities', 'tags');
+
+  }
+
+  public function postSearchTags() {
+
   }
 
 

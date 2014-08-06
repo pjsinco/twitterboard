@@ -4,7 +4,7 @@
           <li><a href="{{ URL::route('leader.tweets.popular') }}">Popular leader tweets</a></li>
           <li><a href="{{ URL::route('leader.mentions') }}">Accounts most mentioned by leaders</a></li>
           <li><a href="{{ URL::route('leader.retweets') }}">Accounts most retweeted by leaders</a></li>
-          <li><a href="#">Tags tweeted by leaders</a></li>
+          <li><a href="{{ URL::route('leader.tags') }}">Top hashtags tweeted by leaders</a></li>
         </ul>
         <strong>Circle</strong>
         <ul class="side-nav">
