@@ -16,5 +16,17 @@ Route::get('/', array(
   'uses' => 'UserController@index'
 ));
 
-Route::get('/tweets/{group}', 'TweetController@index');
+Route::get('/tweets/{group}', array(
+  'as' => 'tweets',
+  'uses' => 'TweetController@index'
+));
 
+Route::post('/tweets/search', 
+  'TweetController@postSearch');
+
+Route::get('/tweets/popular/{group}', array(
+  'as' => 'tweets.popular',
+  'uses' => 'TweetController@getPopular',
+)
+
+);
