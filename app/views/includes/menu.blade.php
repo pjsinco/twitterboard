@@ -1,12 +1,12 @@
         <strong>Leaders</strong>
         <ul class="side-nav">
-          <li><a href="{{ URL::route('leader.tweets') }}">Leader tweets</a></li>
-          <li><a href="{{ URL::route('leader.tweets.popular') }}">Popular leader tweets</a></li>
-          <li><a href="{{ URL::route('leader.mentions') }}">Accounts most mentioned by leaders</a></li>
-          <li><a href="{{ URL::route('leader.retweets') }}">Accounts most retweeted by leaders</a></li>
-          <li><a href="{{ URL::route('leader.tags') }}">Top hashtags tweeted by leaders</a></li>
+          <li><a href="#">Leader tweets</a></li>
+          <li><a href="#">Popular leader tweets</a></li>
+          <li><a href="#">Accounts most mentioned by leaders</a></li>
+          <li><a href="#">Accounts most retweeted by leaders</a></li>
+          <li><a href="#">Top hashtags tweeted by leaders</a></li>
         </ul>
-        <strong>Circle</strong>
+        <strong>All</strong>
         <ul class="side-nav">
           <li><a href="#">All tweets</a></li>
           <li><a href="#">Search tweets</a></li>

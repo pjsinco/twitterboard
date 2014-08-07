@@ -2,6 +2,16 @@
 
 class UserController extends \BaseController {
 
+  private $query_mentions = "
+    SELECT count(*) as count, u.*
+    FROM tc_tweet_mention tm inner join tc_user u
+      on tm.target_user_id = u.user_id
+    WHERE tm.source_user_id in (
+      select user_id
+      from tc_leader
+    )
+  ";
+
   /**
    * Display a listing of the resource.
    *
@@ -35,6 +45,22 @@ class UserController extends \BaseController {
 
   } // end index()
   
+  public function getLeaderMentions() {
+
+//    $this->query_mentions .= "
+//      group by tm.target_user_id
+//      order by count desc
+//      limit 100
+//    ";
+//
+//    $users = DB::select($this->query_mentions);
+//  
+//    return View::make('user.index')
+//      ->with('users', $users)
+//      ->with('entities', 'mentions');
+    return View::make('includes.blank');
+
+  }
   
   /**
    * Show the form for creating a new resource.

@@ -1,6 +1,6 @@
 <?php
 
-class LeaderController extends BaseController
+class TweetController extends BaseController
 {
 
   private $query_tweets = "
@@ -10,16 +10,6 @@ class LeaderController extends BaseController
     FROM tc_tweet t inner join tc_user u
       on t.user_id = u.user_id
     where t.user_id in (
-      select user_id
-      from tc_leader
-    )
-  ";
-
-  private $query_mentions = "
-    SELECT count(*) as count, u.*
-    FROM tc_tweet_mention tm inner join tc_user u
-      on tm.target_user_id = u.user_id
-    WHERE tm.source_user_id in (
       select user_id
       from tc_leader
     )
@@ -48,7 +38,8 @@ class LeaderController extends BaseController
   
   }
   
-  public function getTweets() {
+  public function getTweets($group) {
+    echo Pre::r($group); exit;
 
 //    $this->query_tweets .= "
 //      order by t.created_at DESC
@@ -62,7 +53,7 @@ class LeaderController extends BaseController
       //->with('tweets', $tweets);
   }
 
-  public function getTweetsPopular() {
+  public function getLeaderTweetsPopular() {
 
 //    $this->query_tweets .= "
 //      and (
@@ -81,7 +72,7 @@ class LeaderController extends BaseController
       //->with('tweets', $tweets);
   }
 
-  public function postSearchTweets() {
+  public function postSearchLeaderTweets() {
     // $start is either 1 year ago today or 
     //    the value set by the request
     if (Request::input('start')) {
@@ -113,22 +104,6 @@ class LeaderController extends BaseController
 
   }
 
-  public function getMentions() {
-
-//    $this->query_mentions .= "
-//      group by tm.target_user_id
-//      order by count desc
-//      limit 100
-//    ";
-//
-//    $users = DB::select($this->query_mentions);
-//  
-//    return View::make('user.index')
-//      ->with('users', $users)
-//      ->with('entities', 'mentions');
-    return View::make('includes.blank');
-
-  }
   
   public function postSearchUsers() {
 
