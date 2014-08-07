@@ -15,11 +15,11 @@ $(document).ready(function() {
       filter: filter,
     },
     success: function(response) {
+      $('.content').html('');
       
       response.forEach(function(d, i) {
         $('.content').append(formatTweet(d));
       });
-
     }
   });
 

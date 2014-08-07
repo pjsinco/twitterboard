@@ -50,6 +50,8 @@ class TweetController extends BaseController
           select user_id
           from tc_leader
         )
+        and t.created_at >= '" . $start . "'
+        and t.created_at <= '" . $end . "'
        ";
     } else if ($group == 'us') {
       $q .= "
@@ -74,6 +76,7 @@ class TweetController extends BaseController
         limit 100
       ";
     }
+
     
     // grab the popular tweets
     if ($filter == 'popular') {
