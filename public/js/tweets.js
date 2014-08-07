@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   console.log('group: ' + group);
-  //console.log('controller: ' + controller);
+  console.log('filter: ' + filter);
 
   // make an ajax call to get the content
   // TODO: turn ajax call into a method
@@ -35,6 +35,7 @@ $(document).ready(function() {
         start: $('#start').val(),
         end: $('#end').val(),
         group: group,
+        filter: filter,
       },
       success: function(response) {
 
