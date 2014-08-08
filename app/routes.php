@@ -39,6 +39,8 @@ Route::get('users/mentions-by/{group}', array(
   'uses' => 'UserController@getMentionsBy',
 ));
 
+Route::post('users/search', 'UserController@postSearchMentionsBy');
+
 Route::get('user/{screen_name}', array(
   'as' => 'user',
   'uses' => 'UserController@show',

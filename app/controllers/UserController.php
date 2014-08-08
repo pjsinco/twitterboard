@@ -114,7 +114,13 @@ class UserController extends BaseController
     
   }
 
-  public function postSearchMentionsBy($group) {
+  public function postSearchMentionsBy() {
+    $filter = Request::input('filter');
+    $start = Request::input('start');
+    $end = Request::input('end');
+    $group = Request::input('group');
+    $q = '';
+
     if ($group == 'leaders') {
       $table = 'tc_leader';
     } else if ($group == 'us') {
@@ -131,6 +137,7 @@ class UserController extends BaseController
       )
       and tm.created_at >= '" . $start . "'
       and tm.created_at <= '" . $end . "'
+      group by tm.target_user_id 
       order by count DESC
       limit 100
     ";
@@ -143,7 +150,8 @@ class UserController extends BaseController
     JavaScript::put([
       'group' => $group,
       'controller' => 'user',
-      'filter' => 'Mentioned By'
+      'category' => 'mentions',
+      'label' => 'Mentioned By',
     ]);
 
 
