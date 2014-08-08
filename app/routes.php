@@ -39,7 +39,16 @@ Route::get('users/mentions-by/{group}', array(
   'uses' => 'UserController@getMentionsBy',
 ));
 
-Route::post('users/search', 'UserController@postSearchMentionsBy');
+Route::post('users/search/mentions-by', 
+  'UserController@postSearchMentionsBy');
+
+Route::get('users/retweets-by/{group}', array(
+  'as' => 'users.retweets-by',
+  'uses' => 'UserController@getRetweetsBy',
+));
+
+Route::post('users/search/retweets-by',
+  'UserController@postSearchRetweetsBy');
 
 Route::get('user/{screen_name}', array(
   'as' => 'user',

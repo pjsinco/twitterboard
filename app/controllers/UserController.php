@@ -114,6 +114,47 @@ class UserController extends BaseController
     
   }
 
+  public function getRetweetsBy($group) {
+    JavaScript::put([
+      'group' => $group,
+      'controller' => 'user',
+      'action' => 'retweets-by',
+      'label' => 'retweets',
+    ]);
+
+    return View::make('user.blank');
+  }
+
+  public function postSearchRetweetsBy() {
+    $filter = Request::input('filter');
+    $start = Request::input('start');
+    $end = Request::input('end');
+    $group = Request::input('group');
+
+    if ($group == 'leaders') {
+      $table = 'tc_leader';
+    } else if ($group == 'us') {
+      $table = 'tc_engagement_account';
+    }
+
+    $q = "
+      SELECT count(*) as count, u.*
+      FROM tc_tweet_retweet tr inner join tc_user u
+        on tr.target_user_id = u.user_id
+      WHERE tr.source_user_id in (
+        select user_id
+        from tc_leader
+      )
+      and tr.created_at >= '" . $start . "'
+      and tr.created_at <= '" . $end . "'
+      group by tr.target_user_id 
+      order by count DESC
+      limit 100
+    ";
+
+    return DB::select($q);
+  }
+
   public function postSearchMentionsBy() {
     $filter = Request::input('filter');
     $start = Request::input('start');
@@ -150,10 +191,9 @@ class UserController extends BaseController
     JavaScript::put([
       'group' => $group,
       'controller' => 'user',
-      'category' => 'mentions',
-      'label' => 'Mentioned By',
+      'action' => 'mentions-by',
+      'label' => 'mentions',
     ]);
-
 
     return View::make('user.blank');
   }

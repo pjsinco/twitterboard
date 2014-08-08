@@ -1,15 +1,15 @@
 $(document).ready(function() {
 
-  console.log('billy');
   console.log('group: ' + group);
+  console.log('controller: ' + controller);
+  console.log('action: ' + action);
   console.log('label: ' + label);
-  console.log('category: ' + category);
 
   // make an ajax call to get the content
   // TODO: turn ajax call into a method
   $.ajax({
     type: 'POST',
-    url: '/users/search',
+    url: '/users/search/' + action,
     data: {
       start: $('#start').val(),
       end: $('#end').val(),
@@ -19,7 +19,7 @@ $(document).ready(function() {
       $('.content').html('');
       
       response.forEach(function(d, i) {
-        $('.content').append(formatUser(d, category));
+        $('.content').append(formatUser(d, label));
       });
     }
   });
@@ -27,7 +27,7 @@ $(document).ready(function() {
   $('#date-pick').click(function() {
     $.ajax({
       type: 'POST',
-      url: '/users/search',
+      url: '/users/search/' + action,
       data: {
         start: $('#start').val(),
         end: $('#end').val(),
@@ -37,7 +37,7 @@ $(document).ready(function() {
         $('.content').html('');
         
         response.forEach(function(d, i) {
-          $('.content').append(formatUser(d, category));
+          $('.content').append(formatUser(d, label));
         });
       }
     });
