@@ -16,11 +16,6 @@ Route::get('/', array(
   'uses' => 'UserController@index',
 ));
 
-Route::get('users/{group?}', array(
-  'as'   => 'users',
-  'uses' => 'UserController@index'
-));
-
 Route::get('tweets/{group}', array(
   'as' => 'tweets',
   'uses' => 'TweetController@index'
@@ -54,3 +49,11 @@ Route::get('user/{screen_name}', array(
   'as' => 'user',
   'uses' => 'UserController@show',
 ));
+
+Route::get('tags/{group}', array(
+  'as' => 'tags',
+  'uses' => 'TagController@index',
+));
+
+Route::post('tags/search', 'TagController@postSearch');
+

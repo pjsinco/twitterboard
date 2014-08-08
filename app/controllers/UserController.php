@@ -115,6 +115,7 @@ class UserController extends BaseController
   }
 
   public function getRetweetsBy($group) {
+
     JavaScript::put([
       'group' => $group,
       'controller' => 'user',
@@ -143,7 +144,7 @@ class UserController extends BaseController
         on tr.target_user_id = u.user_id
       WHERE tr.source_user_id in (
         select user_id
-        from tc_leader
+        from $table
       )
       and tr.created_at >= '" . $start . "'
       and tr.created_at <= '" . $end . "'
