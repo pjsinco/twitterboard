@@ -12,21 +12,34 @@
 */
 
 Route::get('/', array(
-  'as'   => 'home',
+  'as' => 'home',
+  'uses' => 'UserController@index',
+));
+
+Route::get('users/{group?}', array(
+  'as'   => 'users',
   'uses' => 'UserController@index'
 ));
 
-Route::get('/tweets/{group}', array(
+Route::get('tweets/{group}', array(
   'as' => 'tweets',
   'uses' => 'TweetController@index'
 ));
 
-Route::post('/tweets/search', 
+Route::post('tweets/search', 
   'TweetController@postSearch');
 
-Route::get('/tweets/popular/{group}', array(
+Route::get('tweets/popular/{group}', array(
   'as' => 'tweets.popular',
   'uses' => 'TweetController@getPopular',
-)
+));
 
-);
+Route::get('users/mentions-by/{group}', array(
+  'as' => 'users.mentions-by',
+  'uses' => 'UserController@getMentionsBy',
+));
+
+Route::get('user/{screen_name}', array(
+  'as' => 'user',
+  'uses' => 'UserController@show',
+));
