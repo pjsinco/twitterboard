@@ -22,7 +22,7 @@
       </div> <!-- end large-4 -->
 
       <div class="large-8 columns">
-        @yield('date_picker')
+        @yield('filter')
 
         <div class="content">
           @yield('content')

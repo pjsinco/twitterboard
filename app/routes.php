@@ -28,6 +28,13 @@ Route::get('tweets/{group}', array(
   'uses' => 'TweetController@index'
 ));
 
+Route::get('tweets/search/circle', array(
+  'as' => 'tweets.search.circle',
+  'uses' => 'TweetController@getSearchTweets'
+));
+
+Route::post('tweets/search/circle', 'TweetController@postSearchTweets');
+
 Route::post('tweets/search', 
   'TweetController@postSearch');
 

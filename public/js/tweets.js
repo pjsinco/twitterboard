@@ -69,19 +69,6 @@ $(document).ready(function() {
   };
 
 
-  /**
-   * Format a tag
-   */
-  var formatTag = function(tag) {
-    var html = '';
-    html += '<tr>';
-    html += '<td>' + tag.count + '</td>';
-    html += '<td>#' + tag.tag + '</td>';
-    html += '</tr>';
-    return html;
-  };
-
-
   /*
    * Format a single tweet
    */
@@ -96,7 +83,7 @@ $(document).ready(function() {
       '<p class="left"><img src="' + 
         tweet.profile_image_url + '"></p>' + 
       '<div class="name">' + tweet.name + 
-      '<a href="http://localhost/user/' + tweet.screen_name + 
+      '<a href="/user/' + tweet.screen_name + 
       '">&commat;' + tweet.screen_name + '</a>' + '</div>' + 
       '<div class="text">' + tweet.tweet_text + '</div>' +
       '<div class="meta">' +

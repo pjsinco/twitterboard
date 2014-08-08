@@ -9,7 +9,6 @@
             <input type='text' id='end' name='end' placeholder='yyyy-mm-dd'>
           </div>
           <div class='large-2 columns'>
-            <button class='button small' id='date-pick' type='submit' name='submit' value='1'>Choose</button>
+            <button class='button tiny' id='date-pick' type='submit' name='submit' value='1'>Choose</button>
           </div>
         </div> <!-- end .search .row -->
-        <hr>

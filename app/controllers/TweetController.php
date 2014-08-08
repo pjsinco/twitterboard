@@ -40,6 +40,45 @@ class TweetController extends BaseController
     
   }
 
+  public function getSearchTweets() {
+
+    return View::make('tweet.search');
+
+  }
+
+  public function postSearchTweets() {
+    $start = Request::input('start');
+    $end = Request::input('end');
+
+    if (Request::ajax()) {
+    
+      $terms = explode(' ', Request::input('terms'));
+      $q = "
+        select *
+        from tc_tweet t inner join tc_user u
+          on t.user_id = u.user_id
+        where
+      ";
+      
+      for ($i = 0; $i < count($terms); $i++) {
+        $term = trim($terms[$i]);
+        if ($i != 0) { // fix fence post
+          $q .= ' and ';
+        }
+        $q .= " tweet_text like '%$term%'";
+      }
+
+      $q .= 'order by t.created_at DESC';
+
+      //$q .= "and t.created_at >= '$start'
+        //and t.created_at <= '$end'";
+
+      return DB::select($q);
+    }
+
+
+  }
+
   public function postSearch() {
 
     $filter = Request::input('filter');

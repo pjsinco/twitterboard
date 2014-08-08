@@ -1,6 +1,6 @@
 @extends('_master')
 
-@section('date_picker')
+@section('filter')
   <!--  we want the date_picker to be included -->
   @include('includes.date_picker')
 @stop
