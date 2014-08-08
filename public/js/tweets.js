@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  
+  console.log('portnoy');
 
   console.log('group: ' + group);
   console.log('filter: ' + filter);

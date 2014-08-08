@@ -2,7 +2,7 @@
         <ul class="side-nav">
           <li><a href="{{ route('tweets', 'leaders') }}">Leader tweets</a></li>
           <li><a href="{{ route('tweets', 'popular/leaders') }}">Popular leader tweets</a></li>
-          <li><a href="#">Accounts most mentioned by leaders</a></li>
+          <li><a href="{{ route('users.mentions-by', 'leaders') }}">Accounts most mentioned by leaders</a></li>
           <li><a href="#">Accounts most retweeted by leaders</a></li>
           <li><a href="#">Top hashtags tweeted by leaders</a></li>
         </ul>

@@ -47,7 +47,7 @@
     {{ HTML::script('js/vendor/jquery.js') }}
     {{ HTML::script('js/vendor/jquery-ui.min.js') }}
     {{ HTML::script('js/date_picker.js') }}
-    {{ HTML::script('js/tweets.js') }}
     {{ HTML::script('js/vendor/modernizr.js') }}
+    @yield('scripts')
   </body>
 </html>

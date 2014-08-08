@@ -15,7 +15,7 @@ class TweetController extends BaseController
       'filter' => '',
     ]);
 
-    return View::make('includes.blank');
+    return View::make('tweet.blank');
 
   }
 
@@ -27,7 +27,7 @@ class TweetController extends BaseController
       'filter' => 'popular',
     ]);
 
-    return View::make('includes.blank');
+    return View::make('tweet.blank');
     
   }
 

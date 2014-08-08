@@ -114,8 +114,28 @@ class UserController extends BaseController
     
   }
 
-  public function postSearch() {
-    // body...
+  public function postSearchMentionsBy($group) {
+    if ($group == 'leaders') {
+      $table = 'tc_leader';
+    } else if ($group == 'us') {
+      $table = 'tc_engagement_account';
+    }
+
+    $q = "
+      SELECT count(*) as count, u.*
+      FROM tc_tweet_mention tm inner join tc_user u
+        on tm.target_user_id = u.user_id
+      WHERE tm.source_user_id in (
+        select user_id
+        from tc_leader
+      )
+      and tm.created_at >= '" . $start . "'
+      and tm.created_at <= '" . $end . "'
+      order by count DESC
+      limit 100
+    ";
+
+    return DB::select($q);
   }
   
   public function getMentionsBy($group) {
@@ -126,7 +146,8 @@ class UserController extends BaseController
       'filter' => 'Mentioned By'
     ]);
 
-    return View::make('includes.blank');
+
+    return View::make('user.blank');
   }
 
 
