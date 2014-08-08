@@ -78,7 +78,12 @@ $(document).ready(function() {
    */
   var formatTweet = function(tweet) {
     var html = '';
-    html +=  '<div class="tweet">' + 
+    html +=  '<div class="panel">' + 
+      '<span class="label right" style="border-left: 1px solid #fff;">' + 
+      tweet.favorite_count + ' favorited' + 
+      '</span>' +
+      '<span class="label right">' + tweet.retweet_count + ' retweets' + 
+      '</span>' +
       '<p class="left"><img src="' + 
         tweet.profile_image_url + '"></p>' + 
       '<div class="name">' + tweet.name + 
@@ -86,44 +91,11 @@ $(document).ready(function() {
       '">&commat;' + tweet.screen_name + '</a>' + '</div>' + 
       '<div class="text">' + tweet.tweet_text + '</div>' +
       '<div class="meta">' +
-      '<p><small>' + tweet.retweet_count + ' retweets since ' + 
-      tweet.created_at + '| ' + tweet.favorite_count + 
-      ' favorited</small></p></div></div> <!--   end .tweet -->';
+      '<small>' + tweet.created_at +  
+      ' </small></div></div> <!--   end .tweet -->';
     return html;
   };
 
-
-  /**
-   * Format a single user
-   */
-  var formatUser = function(user, entity) {
-    var html = '';
-    html += '<div class="panel">' +
-      '<span class="label right">' + user.count + ' ' + 
-      entity + '</span>' +
-      '<p class="left"><img src="' + user.profile_image_url + 
-      '"></p>' + '<div class="name">' + user.name + '<a href="/user/' +
-      user.screen_name + '">&commat;' + user.screen_name + '</a>' +
-      '</div>' +
-      '<div class="description">' +
-      '<p>' + user.description + '<br>' +
-      user.location + ' <a href="' + user.url + '" title="' + 
-      user.screen_name + '" on Twitter">' + user.url + '</a></p>' +
-      '</div>' +
-      "<ul class='inline-list'>" +
-      "<li><strong>Followers:</strong>" + user.followers_count + 
-        "</li>" +
-      "<li><strong>Following:</strong>" + user.friends_count +
-        "</li>" +
-      "<li><strong>Tweets:</strong>"    + user.statuses_count +
-        "</li>" +
-      "<li><strong>Listed:</strong>"    + user.listed_count +
-        "</li>" +
-      "<li><strong>Created:</strong>"   + user.created_at +
-        "</li>" +
-      "</ul>" + '</div> <!-- end .panel  -->';
-    return html;
-  };
 
 
 });

@@ -20,6 +20,7 @@ class TweetController extends BaseController
 
   public function show($tweet_id) {
     
+    return View::make('tweet.show');
   }
 
   public function getPopular($group) {
