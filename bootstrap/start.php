@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-    'local' => array('Patricks-MacBook.local'),
+    'local' => array('*.aoanet.local', 'Patricks-MacBook.local'),
     'production' => array('oneill.asmallorange.com'),
 
 ));
