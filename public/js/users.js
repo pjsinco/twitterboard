@@ -5,6 +5,13 @@ $(document).ready(function() {
   console.log('action: ' + action);
   console.log('label: ' + label);
 
+  var labelHtml = '<span class="label" style="float: left; margin-right: 6px; ' +
+    'top: 6px; text-transform: uppercase">' + group + 
+    '</span>' + 
+    '<h4 style="color: #999; text-transform: uppercase;">' + action + 
+    ' <small class="dates">' + $('#start').val() +
+    ' &ndash; ' + $('#end').val() + '</small></h4>';
+
   // make an ajax call to get the content
   // TODO: turn ajax call into a method
   $.ajax({
@@ -16,11 +23,11 @@ $(document).ready(function() {
       group: group,
     },
     success: function(response) {
-      $('.content').html(
-        '<h4 style="color: #999; text-transform: uppercase;">' + action + 
-        ' ' + group +        ' <small>' + $('#start').val() +
-        ' &ndash; ' + $('#end').val() + '</small></h4>'
-      );
+      $('.content').html(labelHtml);
+
+      var start = $('#start').val();
+      var end = $('#end').val();
+      $('.dates').html(start + ' &ndash; ' + end);
       
       response.forEach(function(d, i) {
         $('.content').append(formatUser(d, label));
@@ -38,11 +45,11 @@ $(document).ready(function() {
         group: group,
       },
       success: function(response) {
-        $('.content').html(
-          '<h4 style="color: #999; text-transform: uppercase;">' + action + 
-          ' ' + group +        ' <small>' + $('#start').val() +
-          ' &ndash; ' + $('#end').val() + '</small></h4>'
-        );
+        $('.content').html(labelHtml);
+
+        var start = $('#start').val();
+        var end = $('#end').val();
+        $('.dates').html(start + ' &ndash; ' + end);
         
         response.forEach(function(d, i) {
           $('.content').append(formatUser(d, label));

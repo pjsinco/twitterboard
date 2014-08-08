@@ -7,7 +7,7 @@ $(document).ready(function() {
     'top: 6px; text-transform: uppercase">' + group + 
     '</span>' + 
     '<h4 style="color: #999; text-transform: uppercase;">' + filter + 
-    ' tweets <small>' + $('#start').val() +
+    ' tweets <small class="dates">' + $('#start').val() +
     ' &ndash; ' + $('#end').val() + '</small></h4>';
 
   // make an ajax call to get the content
@@ -46,6 +46,10 @@ $(document).ready(function() {
       },
       success: function(response) {
         $('.content').html(labelHtml)
+
+        var start = $('#start').val();
+        var end = $('#end').val();
+        $('.dates').html(start + ' &ndash; ' + end);
 
         response.forEach(function(d, i) {
           $('.content').append(formatTweet(d));
