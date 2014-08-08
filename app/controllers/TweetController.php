@@ -15,7 +15,8 @@ class TweetController extends BaseController
       'filter' => '',
     ]);
 
-    return View::make('tweet.blank');
+    return View::make('tweet.blank')
+      ->with('group', $group);
   }
 
   public function show($tweet_id) {
@@ -25,13 +26,17 @@ class TweetController extends BaseController
 
   public function getPopular($group) {
 
+    $filter = 'popular';
+
     JavaScript::put([
       'group' => $group,
       'controller' => 'tweet',
-      'filter' => 'popular',
+      'filter' => $filter,
     ]);
 
-    return View::make('tweet.blank');
+    return View::make('tweet.blank')
+      ->with('group', $group)
+      ->with('filter', $filter);
     
   }
 
@@ -43,7 +48,17 @@ class TweetController extends BaseController
     $group = Request::input('group');
     $q = '';
 
-    if ($group == 'leaders') { 
+    if ($group == 'circle') { 
+      $q .= "
+        SELECT t.tweet_text, t.created_at, u.screen_name, u.name, 
+          u.user_id, t.retweet_count, t.favorite_count, 
+          u.profile_image_url
+        FROM tc_tweet t inner join tc_user u
+          on t.user_id = u.user_id
+        where t.created_at >= '" . $start . "'
+        and t.created_at <= '" . $end . "'
+       ";
+    } else if ($group == 'leaders') { 
       $q .= "
         SELECT t.tweet_text, t.created_at, u.screen_name, u.name, 
           u.user_id, t.retweet_count, t.favorite_count, 

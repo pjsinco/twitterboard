@@ -9,6 +9,7 @@
         <strong>Circle</strong>
         <ul class="side-nav">
           <li><a href="{{ route('tweets', 'circle') }}">All tweets</a></li>
+          <li><a href="{{ route('tweets', 'popular/circle') }}">Popular tweets</a></li>
           <li><a href="#">Search tweets</a></li>
           <li><a href="#">Search users</a></li>
           <li><a href="#">Most frequent mentioners</a></li>

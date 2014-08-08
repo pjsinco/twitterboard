@@ -6,7 +6,6 @@
 @stop
 
 @section('content')
-
 @stop
 
 @section('scripts')

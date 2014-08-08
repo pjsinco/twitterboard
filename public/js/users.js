@@ -16,7 +16,11 @@ $(document).ready(function() {
       group: group,
     },
     success: function(response) {
-      $('.content').html('');
+      $('.content').html(
+        '<h4 style="color: #999; text-transform: uppercase;">' + action + 
+        ' ' + group +        ' <small>' + $('#start').val() +
+        ' &ndash; ' + $('#end').val() + '</small></h4>'
+      );
       
       response.forEach(function(d, i) {
         $('.content').append(formatUser(d, label));
@@ -34,7 +38,11 @@ $(document).ready(function() {
         group: group,
       },
       success: function(response) {
-        $('.content').html('');
+        $('.content').html(
+          '<h4 style="color: #999; text-transform: uppercase;">' + action + 
+          ' ' + group +        ' <small>' + $('#start').val() +
+          ' &ndash; ' + $('#end').val() + '</small></h4>'
+        );
         
         response.forEach(function(d, i) {
           $('.content').append(formatUser(d, label));
