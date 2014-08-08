@@ -1,8 +1,13 @@
 @extends('_master')
 
+@section('date_picker')
+  <!--  we want the date_picker to be included -->
+  @include('includes.date_picker')
+@stop
+
 @section('content')
 
-  <h4>Top hashtags tweeted by leaders</h4>
+  <h4>Top hashtags tweeted by {{ $group }}</h4>
 
   <table class='tags'>
     <thead>
@@ -15,4 +20,8 @@
 
     </tbody>
   </table>
+@stop
+
+@section('scripts')
+    {{ HTML::script('js/tags.js') }}
 @stop

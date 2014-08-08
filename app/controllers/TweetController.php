@@ -16,7 +16,10 @@ class TweetController extends BaseController
     ]);
 
     return View::make('tweet.blank');
+  }
 
+  public function show($tweet_id) {
+    
   }
 
   public function getPopular($group) {

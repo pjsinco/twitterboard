@@ -138,20 +138,22 @@ class UserController extends BaseController
       $table = 'tc_engagement_account';
     }
 
-    $q = "
-      SELECT count(*) as count, u.*
-      FROM tc_tweet_retweet tr inner join tc_user u
-        on tr.target_user_id = u.user_id
-      WHERE tr.source_user_id in (
-        select user_id
-        from $table
-      )
-      and tr.created_at >= '" . $start . "'
-      and tr.created_at <= '" . $end . "'
-      group by tr.target_user_id 
-      order by count DESC
-      limit 100
-    ";
+    if (Request::ajax()) {
+      $q = "
+        SELECT count(*) as count, u.*
+        FROM tc_tweet_retweet tr inner join tc_user u
+          on tr.target_user_id = u.user_id
+        WHERE tr.source_user_id in (
+          select user_id
+          from $table
+        )
+        and tr.created_at >= '" . $start . "'
+        and tr.created_at <= '" . $end . "'
+        group by tr.target_user_id 
+        order by count DESC
+        limit 100
+      ";
+    }
 
     return DB::select($q);
   }
@@ -169,20 +171,22 @@ class UserController extends BaseController
       $table = 'tc_engagement_account';
     }
 
-    $q = "
-      SELECT count(*) as count, u.*
-      FROM tc_tweet_mention tm inner join tc_user u
-        on tm.target_user_id = u.user_id
-      WHERE tm.source_user_id in (
-        select user_id
-        from tc_leader
-      )
-      and tm.created_at >= '" . $start . "'
-      and tm.created_at <= '" . $end . "'
-      group by tm.target_user_id 
-      order by count DESC
-      limit 100
-    ";
+    if (Request::ajax()) {
+      $q = "
+        SELECT count(*) as count, u.*
+        FROM tc_tweet_mention tm inner join tc_user u
+          on tm.target_user_id = u.user_id
+        WHERE tm.source_user_id in (
+          select user_id
+          from tc_leader
+        )
+        and tm.created_at >= '" . $start . "'
+        and tm.created_at <= '" . $end . "'
+        group by tm.target_user_id 
+        order by count DESC
+        limit 100
+      ";
+    }
 
     return DB::select($q);
   }

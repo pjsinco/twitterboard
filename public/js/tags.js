@@ -16,14 +16,34 @@ $(document).ready(function() {
       group: group,
     },
     success: function(response) {
-      $('.content').html('');
       
       response.forEach(function(d, i) {
-        $('.content').append(formatUser(d, label));
+        $('.content table.tags tbody').append(formatTag(d, label));
       });
     }
   });
   
+  $('#date-pick').click(function() {
+
+    $.ajax({
+      type: 'POST',
+      url: '/tags/search',
+      data: {
+        start: $('#start').val(),
+        end: $('#end').val(),
+        group: group,
+      },
+      success: function(response) {
+        
+        // clear the table body
+        $('.content table.tags tbody').html('');
+
+        response.forEach(function(d, i) {
+          $('.content table.tags tbody').append(formatTag(d, label));
+        });
+      }
+    });
+  });
 
   /**
    * Format a tag
