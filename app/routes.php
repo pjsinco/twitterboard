@@ -56,6 +56,13 @@ Route::get('users/retweets-by/{group}', array(
   'uses' => 'UserController@getRetweetsBy',
 ));
 
+Route::get('users/search', array(
+  'as' => 'users.search',
+  'uses' => 'UserController@getSearch',
+));
+
+Route::post('users/search', 'UserController@postSearch');
+
 Route::post('users/search/retweets-by',
   'UserController@postSearchRetweetsBy');
 

@@ -42,7 +42,8 @@ class TweetController extends BaseController
 
   public function getSearchTweets() {
 
-    return View::make('tweet.search');
+    return View::make('tweet.search')
+      ->with('search_entity', 'tweets');
 
   }
 
@@ -69,6 +70,7 @@ class TweetController extends BaseController
       }
 
       $q .= 'order by t.created_at DESC';
+      $q .= 'limit 100';
 
       //$q .= "and t.created_at >= '$start'
         //and t.created_at <= '$end'";

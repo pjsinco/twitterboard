@@ -11,7 +11,7 @@
           <li><a href="{{ route('tweets', 'circle') }}">All tweets</a></li>
           <li><a href="{{ route('tweets', 'popular/circle') }}">Popular tweets</a></li>
           <li><a href="{{ route('tweets.search.circle') }}">Search tweets</a></li>
-          <li><a href="#">Search users</a></li>
+          <li><a href="{{ route('users.search') }}">Search user descriptions</a></li>
           <li><a href="#">Most frequent mentioners</a></li>
           <li><a href="#">Most frequent retweeters</a></li>
           <li><a href="{{ route('tags', 'circle') }}">Tags tweeted by circle</a></li>

@@ -19,6 +19,40 @@ class UserController extends BaseController
 
   }
 
+  public function getSearch() {
+
+    return View::make('user.search')
+      ->with('search_entity', 'user descriptions');
+  }
+
+  public function postSearch() {
+
+    if (Request::ajax()) {
+    
+      $terms = explode(' ', Request::input('terms'));
+
+      $q = "
+        select *
+        from tc_user 
+        where
+      ";
+      
+      for ($i = 0; $i < count($terms); $i++) {
+        $term = trim($terms[$i]);
+        if ($i != 0) { // fix fence post
+          $q .= ' and ';
+        }
+        $q .= " description like '%$term%'";
+      }
+
+      $q .= ' order by followers_count DESC';
+      $q .= ' limit 100';
+
+      return DB::select($q);
+    }
+
+  }
+
   public function show($screen_name) {
 
     $user = User::where('screen_name', '=', $screen_name)

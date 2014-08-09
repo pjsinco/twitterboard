@@ -400,3 +400,12 @@ select t.*, tt.*
 from tc_tweet_tag tt inner join tc_tweet t
   on tt.tweet_id = t.tweet_id
 where tag = 'Wimbledon'
+
+select
+from tc_tweet_mention tm tc_user u
+  on tm.
+where
+
+select *
+from tc_tweet_mention
+where target_user_id = 295697157

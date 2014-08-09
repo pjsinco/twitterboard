@@ -2,13 +2,6 @@ $(document).ready(function() {
 
   console.log('bike');
 
-  //var labelHtml = '<span class="label" style="float: left; margin-right: 6px; ' +
-    //'top: 6px; text-transform: uppercase">' + group + 
-    //'</span>' + 
-    //'<h4 style="color: #999; text-transform: uppercase;">' + filter + 
-    //' tweets <small class="dates">' + $('#start').val() +
-    //' &ndash; ' + $('#end').val() + '</small></h4>';
-
   $('#search-terms').click(function(evt) {
 
     var terms = $('#terms').val();
