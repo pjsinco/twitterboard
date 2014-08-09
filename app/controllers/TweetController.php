@@ -55,7 +55,9 @@ class TweetController extends BaseController
     
       $terms = explode(' ', Request::input('terms'));
       $q = "
-        select *
+        select t.tweet_text, t.created_at, u.name, 
+          u.screen_name, t.retweet_count, t.favorite_count,
+          u.profile_image_url
         from tc_tweet t inner join tc_user u
           on t.user_id = u.user_id
         where
@@ -66,11 +68,11 @@ class TweetController extends BaseController
         if ($i != 0) { // fix fence post
           $q .= ' and ';
         }
-        $q .= " tweet_text like '%$term%'";
+        $q .= " t.tweet_text like '%$term%'";
       }
 
-      $q .= 'order by t.created_at DESC';
-      $q .= 'limit 100';
+      $q .= ' order by t.created_at DESC';
+      $q .= ' limit 100';
 
       //$q .= "and t.created_at >= '$start'
         //and t.created_at <= '$end'";

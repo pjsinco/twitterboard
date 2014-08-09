@@ -2,6 +2,8 @@ $(document).ready(function() {
 
   console.log('bike');
 
+  var labelHtml = 
+
   $('#search-terms').click(function(evt) {
 
     var terms = $('#terms').val();
@@ -17,7 +19,11 @@ $(document).ready(function() {
       success: function(response) {
         console.log(response);
     
-        $('.content').html('');
+        $('.content').html(
+          '<h4 style="color: #999; text-transform: uppercase;">' + 
+          'Results for <span class="search-term">"' + terms + 
+          '"</span></h4>'
+        );
 
         response.forEach(function(d, i) {
           $('.content').append(formatTweet(d));
@@ -41,7 +47,7 @@ $(document).ready(function() {
       '<p class="left"><img src="' + 
         tweet.profile_image_url + '"></p>' + 
       '<div class="name">' + tweet.name + 
-      '<a href="/user/' + tweet.screen_name + 
+      ' <a href="/user/' + tweet.screen_name + 
       '">&commat;' + tweet.screen_name + '</a>' + '</div>' + 
       '<div class="text">' + tweet.tweet_text + '</div>' +
       '<div class="meta">' +
