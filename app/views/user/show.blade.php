@@ -5,8 +5,10 @@
     
     <div class="header">
       <h1 class='subheader'>
-        <img src="{{ $user->profile_image_url }}" alt="Profile image of {{ $user->screen_name }}" />
-        &commat;{{ $user->screen_name }}
+        <a href='https://twitter.com/{{ $user->screen_name }}' title='{{ $user->name }} ({{ $user->screen_name }}) on Twitter'>
+          <img src="{{ $user->profile_image_url }}" alt="Profile image of {{ $user->screen_name }}" />
+          &commat;{{ $user->screen_name }}
+        </a>
       </h1>
       <hr>
     </div>
