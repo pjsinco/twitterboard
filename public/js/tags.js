@@ -45,17 +45,6 @@ $(document).ready(function() {
     });
   });
 
-  /**
-   * Format a tag
-   */   
-  var formatTag = function(tag) {
-    var html = '';
-    html += '<tr>';
-    html += '<td>' + tag.count + '</td>';
-    html += '<td>#' + tag.tag + '</td>';
-    html += '</tr>';
-    return html;
-  };
 
 
 });

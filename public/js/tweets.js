@@ -57,41 +57,4 @@ $(document).ready(function() {
       }
     });
   });
-
-
-  /**
-   * Format table for listing tags
-   */
-  var formatTable = function() {
-    var $content = $('.content').html('');
-    $content.append('<table><thead><tr><th width="100">Count</th>' +
-      '<th widtb="200">Tag</th><tbody>');
-  };
-
-
-  /*
-   * Format a single tweet
-   */
-  var formatTweet = function(tweet) {
-    var html = '';
-    html +=  '<div class="panel">' + 
-      '<span class="label right" style="border-left: 1px solid #fff;">' + 
-      tweet.favorite_count + ' favorited' + 
-      '</span>' +
-      '<span class="label right">' + tweet.retweet_count + ' retweets' + 
-      '</span>' +
-      '<p class="left"><img src="' + 
-        tweet.profile_image_url + '"></p>' + 
-      '<div class="name">' + tweet.name + 
-      '<a href="/user/' + tweet.screen_name + 
-      '">&commat;' + tweet.screen_name + '</a>' + '</div>' + 
-      '<div class="text">' + tweet.tweet_text + '</div>' +
-      '<div class="meta">' +
-      '<small>' + tweet.created_at +  
-      ' </small></div></div> <!--   end .tweet -->';
-    return html;
-  };
-
-
-
 });

@@ -1,0 +1,95 @@
+@import "settings";
+/*@import "foundation";*/
+
+// Or selectively include components
+ @import
+//   "foundation/components/accordion",
+//   "foundation/components/alert-boxes",
+//   "foundation/components/block-grid",
+//   "foundation/components/breadcrumbs",
+   "foundation/components/button-groups",
+   "foundation/components/buttons",
+   "foundation/components/clearing",
+//   "foundation/components/dropdown",
+//   "foundation/components/dropdown-buttons",
+//   "foundation/components/flex-video",
+   "foundation/components/forms",
+   "foundation/components/grid",
+   "foundation/components/inline-lists",
+//   "foundation/components/joyride",
+//   "foundation/components/keystrokes",
+   "foundation/components/labels",
+//   "foundation/components/magellan",
+//   "foundation/components/orbit",
+//   "foundation/components/pagination",
+   "foundation/components/panels",
+//   "foundation/components/pricing-tables",
+//   "foundation/components/progress-bars",
+//   "foundation/components/reveal",
+   "foundation/components/side-nav",
+   "foundation/components/split-buttons",
+//   "foundation/components/sub-nav",
+//   "foundation/components/switch",
+   "foundation/components/tables",
+   "foundation/components/tabs",
+//   "foundation/components/thumbs",
+//   "foundation/components/tooltips",
+//   "foundation/components/top-bar",
+   "foundation/components/type";
+//   "foundation/components/offcanvas",
+//   "foundation/components/visibility";
+
+$light-gray: #d0d0d0;
+$light-med-gray: #f5f5f5;
+$med-gray: #616161;
+
+.profile-image {
+  float: left;
+}
+
+.tweet {
+  /*background-color: scale-color(#fff, $lightness: -5%);*/
+  /*margin-bottom: rem-calc(10);*/
+  padding: rem-calc(10);
+  border: 1px solid $secondary-color;
+  margin-top: rem-calc(10);
+  color: $med-gray;
+  font-size: rem-calc(15);
+
+  &:hover {
+    border: 1px solid $primary-color;
+    z-index: 10000;
+  }
+  
+  img {
+    float: left;
+    margin-right: rem-calc(6);
+    border-radius: $global-radius;
+    height: rem-calc(24);
+    width: rem-calc(24);
+    /*position: relative;*/
+    /*top: 10px;*/
+  }
+
+  .label {
+    margin-bottom: 0;
+  }
+
+  .name {
+    color: $body-font-color;
+    
+    a {
+      color: $med-gray;
+      font-weight: normal;
+    
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .text {
+    margin-left: 30px;
+  }
+
+}
