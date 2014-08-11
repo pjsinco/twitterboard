@@ -67,8 +67,8 @@ $med-gray: #616161;
     border-radius: $global-radius;
     height: rem-calc(24);
     width: rem-calc(24);
-    /*position: relative;*/
-    /*top: 10px;*/
+    position: relative;
+    top: rem-calc(5);
   }
 
   .label {
@@ -90,6 +90,25 @@ $med-gray: #616161;
 
   .text {
     margin-left: 30px;
+  }
+
+}
+
+/**
+  ===================
+  JQUERY UI OVERRIDES
+  ===================
+ */
+.ui-datepicker  {
+
+  .ui-datepicker-title {
+    margin: 0;
+    background-color: $primary-color;
+    color: #fff;
+  }
+
+  .ui-datepicker-header {
+    padding: 0;
   }
 
 }

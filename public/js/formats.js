@@ -12,21 +12,23 @@ var formatTable = function() {
  * Format a single tweet
  */
 var formatTweet = function(tweet) {
+  console.log(tweet.tweet_id);
   var html = '';
   html +=  '<div class="tweet">' + 
-    '<div class="profile-image"><img src="' + tweet.profile_image_url + '"></div>' + 
-    '<span class="label right" style="border-left: 1px solid #fff;">' + 
+    '<a href="http://twitter.com/' + tweet.screen_name + 
+    '/status/' + tweet.tweet_id + '">' +
+    '<div class="profile-image"><img src="' + tweet.profile_image_url +
+    '"></div>' + 
+    '<span class="label right" style="border-left: 1px solid #fff;">' +
     tweet.favorite_count + ' favorited' + 
     '</span>' +
-    '<span class="label right">' + tweet.retweet_count + ' retweets' + 
+    ' <span class="label right">' + tweet.retweet_count + ' retweets' +
     '</span>' +
     '<div class="name">' + tweet.name + 
     '<a href="/user/' + tweet.screen_name + 
-    '"> &commat;' + tweet.screen_name + '</a>' + '</div>' + 
-    '<div class="text">' + tweet.tweet_text + '</div>' +
-    '<div class="meta">' +
-    '<small>' + tweet.created_at +  
-    ' </small></div></div> <!--   end .tweet -->';
+    '"> &commat;' + tweet.screen_name + '</a> ' + tweet.created_at + 
+    '</div>' + '<div class="text">' + tweet.tweet_text + '</div>' +
+    '<div class="meta"></div></a></div> <!--   end .tweet -->';
   return html;
 };
 

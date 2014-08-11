@@ -54,8 +54,10 @@ class TweetController extends BaseController
     if (Request::ajax()) {
     
       $terms = explode(' ', Request::input('terms'));
+      // ex. with date_format:
+      // select t.tweet_text, date_format(t.created_at, '%b. %d') as created_at, u.name, 
       $q = "
-        select t.tweet_text, t.created_at, u.name, 
+        select t.tweet_id, t.tweet_text, t.created_at, u.name, 
           u.screen_name, t.retweet_count, t.favorite_count,
           u.profile_image_url
         from tc_tweet t inner join tc_user u
@@ -77,11 +79,17 @@ class TweetController extends BaseController
       //$q .= "and t.created_at >= '$start'
         //and t.created_at <= '$end'";
 
-      return DB::select($q);
+      $results = DB::select($q);
+    
+      foreach ($results as $result) {
+        $result->created_at = 
+          $this->format_date($result->created_at);
+      }
+
+      return $results;
     }
-
-
   }
+
 
   public function postSearch() {
 
@@ -93,7 +101,8 @@ class TweetController extends BaseController
 
     if ($group == 'circle') { 
       $q .= "
-        SELECT t.tweet_text, t.created_at, u.screen_name, u.name, 
+        SELECT t.tweet_text, t.created_at, t.tweet_id,
+          u.screen_name, u.name, 
           u.user_id, t.retweet_count, t.favorite_count, 
           u.profile_image_url
         FROM tc_tweet t inner join tc_user u
@@ -103,8 +112,8 @@ class TweetController extends BaseController
        ";
     } else if ($group == 'leaders') { 
       $q .= "
-        SELECT t.tweet_text, t.created_at, u.screen_name, u.name, 
-          u.user_id, t.retweet_count, t.favorite_count, 
+        SELECT t.tweet_text, t.tweet_id, t.created_at, u.screen_name, 
+          u.name, u.user_id, t.retweet_count, t.favorite_count, 
           u.profile_image_url
         FROM tc_tweet t inner join tc_user u
           on t.user_id = u.user_id
@@ -152,9 +161,18 @@ class TweetController extends BaseController
     } 
 
     //echo Pre::r($q);
-    return DB::select($q);
+    $results = DB::select($q);
 
+    foreach ($results as $result) {
+      $result->created_at = 
+        $this->format_date($result->created_at);
+    }
+
+    return $results;
   }
 
+  private function format_date($date) {
+    return date('F d', strtotime($date));
+  }
 
 } // eoc

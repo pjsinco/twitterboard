@@ -3,6 +3,8 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>@yield('title', 'TwitterBoard')</title>
+    <link rel="stylesheet" href='{{ URL::asset('css/jquery-ui.min.css') }}' >
+    <link rel="stylesheet" href='{{ URL::asset('css/jquery-ui.structure.min.css') }}' >
     <link rel="stylesheet" href='{{ URL::asset('css/app.css') }}' >
     @yield('head')
   </head>
