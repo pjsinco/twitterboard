@@ -32,7 +32,12 @@ class UserController extends BaseController
       $terms = explode(' ', Request::input('terms'));
 
       $q = "
-        select *
+        select last_updated, user_id, screen_name, name, profile_image_url,
+          location, url, description, created_at, last_tweet_date,
+          format(followers_count, 0) as followers_count, 
+          format(statuses_count, 0) as statuses_count, 
+          format(listed_count, 0) as listed_count,
+          format(friends_count, 0) as friends_count
         from tc_user 
         where
       ";

@@ -14,7 +14,7 @@ var formatTable = function() {
 var formatTweet = function(tweet) {
   console.log(tweet.tweet_id);
   var html = '';
-  html +=  '<div class="tweet">' + 
+  html +=  '<div class="card-info">' + 
     '<div class="profile-image"><img src="' + tweet.profile_image_url +
     '"></div>' + 
     '<a href="http://twitter.com/' + tweet.screen_name + 
@@ -51,14 +51,13 @@ var formatTag = function(tag) {
  **/
 var formatUser = function(user, category) {
   var html = '';
-  html += '<div class="panel">' +
-    '<span class="label right">' + user.count + ' ' + 
-    category + '</span>' +
-    '<p class="left"><img src="' + user.profile_image_url + 
-    '"></p>' + '<div class="name">' + user.name + '<a href="/user/' +
+  html += '<div class="card-info">' +
+    '<div class="profile-image"><img src="' + user.profile_image_url +
+    '"></div>' + 
+    '<div class="name">' + user.name + '<a href="/user/' +
     user.screen_name + '">&commat;' + user.screen_name + '</a>' +
     '</div>' +
-    '<div class="description">' +
+    '<div class="text">' +
     '<p>' + user.description + '<br>' +
     user.location + ' <a href="' + user.url + '" title="' + 
     user.screen_name + '" on Twitter">' + user.url + '</a></p>' +
