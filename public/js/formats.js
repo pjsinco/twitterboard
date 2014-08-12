@@ -15,20 +15,20 @@ var formatTweet = function(tweet) {
   console.log(tweet.tweet_id);
   var html = '';
   html +=  '<div class="tweet">' + 
-    '<a href="http://twitter.com/' + tweet.screen_name + 
-    '/status/' + tweet.tweet_id + '">' +
     '<div class="profile-image"><img src="' + tweet.profile_image_url +
     '"></div>' + 
+    '<a href="http://twitter.com/' + tweet.screen_name + 
+    '/status/' + tweet.tweet_id + '">' +
     '<span class="label right" style="border-left: 1px solid #fff;">' +
     tweet.favorite_count + ' favorited' + 
     '</span>' +
     ' <span class="label right">' + tweet.retweet_count + ' retweets' +
-    '</span>' +
+    '</span>' + '</a>' +
     '<div class="name">' + tweet.name + 
     '<a href="/user/' + tweet.screen_name + 
     '"> &commat;' + tweet.screen_name + '</a> ' + tweet.created_at + 
     '</div>' + '<div class="text">' + tweet.tweet_text + '</div>' +
-    '<div class="meta"></div></a></div> <!--   end .tweet -->';
+    '<div class="meta"></div></div> <!--   end .tweet -->';
   return html;
 };
 

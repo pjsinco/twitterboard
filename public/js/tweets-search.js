@@ -1,8 +1,7 @@
 $(document).ready(function() {
 
   console.log('bike');
-
-  var labelHtml = 
+  var target = document.getElementsByClassName('content')[0];
 
   $('#search-terms').click(function(evt) {
 
@@ -11,6 +10,10 @@ $(document).ready(function() {
     $.ajax({
       type: 'POST',
       url: '/tweets/search/circle',
+      beforeSend: function() {
+        var spinner = 
+          new Spinner({top: '200%', left: '50%'}).spin(target);
+      },
       data: {
         //start: $('#start').val(),
         //end: $('#end').val(),

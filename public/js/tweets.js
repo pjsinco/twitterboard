@@ -3,6 +3,8 @@ $(document).ready(function() {
   console.log('group: ' + group);
   console.log('filter: ' + filter);
 
+  var target = document.getElementsByClassName('content')[0];
+
   var labelHtml = '<span class="label" style="float: left; margin-right: 6px; ' +
     'top: 6px; text-transform: uppercase">' + group + 
     '</span>' + 
@@ -21,8 +23,12 @@ $(document).ready(function() {
       group: group,
       filter: filter,
     },
+    beforeSend: function() {
+      var spinner = 
+        new Spinner({top: '200%', left: '50%'}).spin(target);
+    },
     success: function(response) {
-      $('.content').html(labelHtml)
+      $('.content').html(labelHtml);
       
       response.forEach(function(d, i) {
         $('.content').append(formatTweet(d));
@@ -44,8 +50,12 @@ $(document).ready(function() {
         group: group,
         filter: filter,
       },
+      beforeSend: function() {
+        var spinner = 
+          new Spinner({top: '200%', left: '50%'}).spin(target);
+      },
       success: function(response) {
-        $('.content').html(labelHtml)
+        $('.content').html(labelHtml);
 
         var start = $('#start').val();
         var end = $('#end').val();

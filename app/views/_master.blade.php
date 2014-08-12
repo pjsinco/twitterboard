@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>@yield('title', 'TwitterBoard')</title>
-    <link rel="stylesheet" href='{{ URL::asset('css/jquery-ui.min.css') }}' >
+    {{ HTML::style('css/jquery-ui.min.css') }}
     <link rel="stylesheet" href='{{ URL::asset('css/jquery-ui.structure.min.css') }}' >
     <link rel="stylesheet" href='{{ URL::asset('css/app.css') }}' >
     @yield('head')
@@ -49,6 +49,7 @@
     {{ HTML::script('js/vendor/modernizr.js') }}
     {{ HTML::script('js/vendor/jquery.js') }}
     {{ HTML::script('js/vendor/jquery-ui.min.js') }}
+    {{ HTML::script('js/vendor/spin.min.js') }}
     {{ HTML::script('js/date_picker.js') }}
     {{ HTML::script('js/formats.js') }}
     @yield('scripts')
