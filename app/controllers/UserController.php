@@ -123,24 +123,29 @@ class UserController extends BaseController
       ->with('user', $user)
       ->with('tweets', $tweets)
       ->with('mentioned_per_day', 
+          ($tweets->tweet_days ? 
           number_format(
             $mentions->mentioned_count / $tweets->tweet_days, 2
-          )
+          ) : 0)
       )
       ->with('tweets_per_day', 
-          number_format(
-            $tweets->total_tweets / $tweets->tweet_days, 2
-          )
+          ($tweets->tweet_days ? 
+            number_format(
+              $tweets->total_tweets / $tweets->tweet_days, 2
+          ) : 0)
       )
       ->with('retweeted_per_day', 
-          number_format(
-            $retweeted->retweeted_count / $tweets->tweet_days, 2
-          )
+          ($tweets->tweet_days ? 
+            number_format(
+              $retweeted->retweeted_count / $tweets->tweet_days, 2
+          ) : 0)
       )
       ->with('retweeted_per_tweet', 
-          number_format(
-            $retweeted->retweeted_count / $tweets->total_tweets, 2
-          )
+          ($tweets->total_tweets ? 
+            number_format(
+              $retweeted->retweeted_count / $tweets->total_tweets, 2
+          ) : 0)
+    
       )
       ->with('favorite_tags', $favorite_tags)
       ->with('most_mentioned', $most_mentioned)
