@@ -35,7 +35,7 @@
     <div class="row">
       <div class="columns large-12">
         <h3>
-          Key indicators <small>for most recent {{ number_format($tweets->total_tweets) }} tweets&mdash;since 
+          Key indicators <small>for {{ number_format($tweets->total_tweets) }} recent tweets&mdash;since 
           {{ date_format(new DateTime($tweets->tweets_since), 'F j, Y') }}</small>
         </h3>
       </div> <!-- end columns -->
