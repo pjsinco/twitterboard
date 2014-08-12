@@ -82,8 +82,14 @@ class TweetController extends BaseController
       $results = DB::select($q);
     
       foreach ($results as $result) {
+
+        // format the date
         $result->created_at = 
           $this->format_date($result->created_at);
+
+        // replace characters 
+        $result->tweet_text = 
+           $this->format_string($result->tweet_text);
       }
 
       return $results;
@@ -166,9 +172,32 @@ class TweetController extends BaseController
     foreach ($results as $result) {
       $result->created_at = 
         $this->format_date($result->created_at);
+
+      $result->tweet_text = 
+        $this->format_string($result->tweet_text);
     }
 
     return $results;
+  }
+
+  // replaces weird characters in strings
+  private function format_string($string) {
+
+    return str_replace(array(
+      "\xE2\x80\x98", 
+      "\xE2\x80\x99", 
+      "\xE2\x80\x9C", 
+      "\xE2\x80\x9D",
+      "\xE2\x80\xa6",
+      "â€™",
+      "Â",
+      "â€",
+      "œ",
+      "Ã",
+    ),  array( "'", "'", '"', '"', "...", "'", " ", '"', '"',
+      "í"), 
+      $string);
+    
   }
 
   private function format_date($date) {
