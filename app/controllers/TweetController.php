@@ -194,8 +194,9 @@ class TweetController extends BaseController
       "â€",
       "œ",
       "Ã",
+      "ðŸ˜¨",
     ),  array( "'", "'", '"', '"', "...", "'", " ", '"', '"',
-      "í"), 
+      "í", "&#128552;"), 
       $string);
     
   }
