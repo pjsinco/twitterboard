@@ -49,13 +49,14 @@ $med-gray: #616161;
   /*margin-bottom: rem-calc(10);*/
   padding: rem-calc(10);
   border: 1px solid $secondary-color;
-  margin-top: rem-calc(10);
+  margin-top: rem-calc(-1);
   color: $med-gray;
   font-size: rem-calc(15);
+  position: relative;
 
   &:hover {
     border: 1px solid $primary-color;
-    z-index: 10000;
+    z-index: 10;
   }
   
   .profile-image {
